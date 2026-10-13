@@ -24,6 +24,11 @@ public class AdminMainActivity extends AppCompatActivity {
 
         // Security check: only ADMIN can access
         if (!sessionManager.isAdmin()) {
+            if (sessionManager.isLoggedIn()) {
+                startActivity(new Intent(this, com.tastygo.ui.user.UserMainActivity.class));
+            } else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
             finish();
             return;
         }

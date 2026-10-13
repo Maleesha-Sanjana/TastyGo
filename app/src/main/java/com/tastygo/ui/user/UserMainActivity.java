@@ -22,6 +22,12 @@ public class UserMainActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
+        if (!sessionManager.isLoggedIn()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
         binding.tvUserGreeting.setText("Welcome, " + sessionManager.getUserName() + "!");
         binding.tvUserInfo.setText("Role: " + sessionManager.getUserRole() + " | Email: " + sessionManager.getUserEmail() +
                 "\n\nPhase 1 Architecture initialized successfully:\n• SQLite Helper & DAOs connected\n• Seed data loaded\n• Session tracking active");
