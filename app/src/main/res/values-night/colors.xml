@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Identity (Night) -->
+    <color name="primary_chili">#F2542D</color>
+    <color name="primary_chili_dark">#D93E18</color>
+    <color name="primary_chili_tint">#3B1F17</color>
+    <color name="accent_butter">#FFC93C</color>
+    <color name="accent_butter_light">#382E12</color>
+    <color name="success_basil">#34B57A</color>
+    <color name="success_basil_light">#173827</color>
+
+    <!-- Surfaces & Backgrounds (Night) -->
+    <color name="bg_mist">#14121A</color>
+    <color name="surface_card">#201C2B</color>
+    <color name="border_line">#2E293D</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Typography (Night) -->
+    <color name="text_ink">#F6F3F8</color>
+    <color name="text_caption">#9D98AA</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Dietary Markers -->
+    <color name="veg_green">#34B57A</color>
+    <color name="non_veg_red">#FF5252</color>
+    <color name="rating_gold">#FFC107</color>
+
+    <!-- Order Status Colors (Night) -->
+    <color name="status_placed_bg">#3B1F17</color>
+    <color name="status_placed_text">#FF7A59</color>
+    <color name="status_preparing_bg">#3D3012</color>
+    <color name="status_preparing_text">#FFD56B</color>
+    <color name="status_delivered_bg">#173827</color>
+    <color name="status_delivered_text">#4CD495</color>
+    <color name="status_cancelled_bg">#2C2836</color>
+    <color name="status_cancelled_text">#A8A4B6</color>
+
+    <!-- Overlay & Scrim -->
+    <color name="scrim_black_40">#80000000</color>
+    <color name="scrim_black_60">#B3000000</color>
+</resources>

@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path
+        android:fillColor="#FFF5D9"
+        android:pathData="M0,0h200v200h-200z" />
+    <!-- Pizza Dough -->
+    <path
+        android:fillColor="#E09F3E"
+        android:pathData="M100,20 A80,80 0 1,0 100,180 A80,80 0 1,0 100,20 Z" />
+    <!-- Tomato Sauce -->
+    <path
+        android:fillColor="#D62828"
+        android:pathData="M100,28 A72,72 0 1,0 100,172 A72,72 0 1,0 100,28 Z" />
+    <!-- Cheese Base -->
+    <path
+        android:fillColor="#FFC93C"
+        android:pathData="M100,34 A66,66 0 1,0 100,166 A66,66 0 1,0 100,34 Z" />
+    <!-- Buffalo Mozzarella Rounds -->
+    <path android:fillColor="#FFFFFF" android:pathData="M80,75 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0" />
+    <path android:fillColor="#FFFFFF" android:pathData="M125,115 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0" />
+    <path android:fillColor="#FFFFFF" android:pathData="M70,125 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0" />
+    <!-- Fresh Basil Leaves -->
+    <path android:fillColor="#2E9E6B" android:pathData="M105,65 Q115,55 125,65 Q115,75 105,65 Z" />
+    <path android:fillColor="#2E9E6B" android:pathData="M65,95 Q75,85 85,95 Q75,105 65,95 Z" />
+    <path android:fillColor="#2E9E6B" android:pathData="M110,135 Q120,125 130,135 Q120,145 110,135 Z" />
+</vector>

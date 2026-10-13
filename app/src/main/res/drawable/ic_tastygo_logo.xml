@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Outer Glow Circle -->
+    <path
+        android:fillColor="#FDE8E3"
+        android:pathData="M48,6A42,42 0 1,0 48,90A42,42 0 1,0 48,6Z" />
+    <!-- Cloche Base Plate -->
+    <path
+        android:fillColor="#231F2E"
+        android:pathData="M22,66L74,66A3,3 0 0,1 77,69L77,71A3,3 0 0,1 74,74L22,74A3,3 0 0,1 19,71L19,69A3,3 0 0,1 22,66Z" />
+    <!-- Food Cloche Cover -->
+    <path
+        android:fillColor="#F2542D"
+        android:pathData="M24,62C24,45 34,32 48,32C62,32 72,45 72,62L24,62Z" />
+    <!-- Cloche Top Knob -->
+    <path
+        android:fillColor="#FFC93C"
+        android:pathData="M48,22A5,5 0 1,0 48,32A5,5 0 1,0 48,22Z" />
+    <!-- Delicious Steam Curves -->
+    <path
+        android:strokeColor="#FFC93C"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M42,18C40,14 43,10 41,7" />
+    <path
+        android:strokeColor="#F2542D"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M52,19C55,15 53,11 55,8" />
+</vector>

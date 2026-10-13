@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path
+        android:fillColor="#FDE8E3"
+        android:pathData="M0,0h200v200h-200z" />
+    <path
+        android:fillColor="#E09F3E"
+        android:pathData="M100,20 A80,80 0 1,0 100,180 A80,80 0 1,0 100,20 Z" />
+    <path
+        android:fillColor="#D62828"
+        android:pathData="M100,28 A72,72 0 1,0 100,172 A72,72 0 1,0 100,28 Z" />
+    <path
+        android:fillColor="#FFC93C"
+        android:pathData="M100,34 A66,66 0 1,0 100,166 A66,66 0 1,0 100,34 Z" />
+    <!-- Pepperoni Slices -->
+    <path android:fillColor="#962A14" android:pathData="M80,65 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path android:fillColor="#962A14" android:pathData="M125,75 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path android:fillColor="#962A14" android:pathData="M65,110 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path android:fillColor="#962A14" android:pathData="M115,115 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path android:fillColor="#962A14" android:pathData="M85,145 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+</vector>
