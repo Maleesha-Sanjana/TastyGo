@@ -50,10 +50,14 @@
             android:name=".ui.user.UserMainActivity"
             android:exported="false" />
 
-        <!-- Admin Main Activity -->
+        <!-- Admin Activities -->
         <activity
             android:name=".ui.admin.AdminMainActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.admin.AddEditFoodActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 
