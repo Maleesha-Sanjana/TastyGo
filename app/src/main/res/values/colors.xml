@@ -9,10 +9,13 @@
     <color name="success_basil">#2E9E6B</color>
     <color name="success_basil_light">#E4F7EC</color>
 
-    <!-- Surfaces & Backgrounds -->
     <color name="bg_mist">#F6F3F8</color>
+    <color name="mist">#F6F3F8</color>
     <color name="surface_card">#FFFFFF</color>
     <color name="border_line">#E6E1EC</color>
+    <color name="chili_tint">#FDE8E3</color>
+    <color name="basil_tint">#E4F7EC</color>
+    <color name="status_basil">#2E9E6B</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 

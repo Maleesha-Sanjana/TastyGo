@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_mist">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingBottom="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Hero Image Header with Floating Buttons -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:background="@color/mist">
+
+                <ImageView
+                    android:id="@+id/iv_detail_hero"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Food Hero Image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/food_burger_classic" />
+
+                <!-- Back Button -->
+                <ImageButton
+                    android:id="@+id/btn_detail_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|start"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/bg_circle_white"
+                    android:contentDescription="Back"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/text_ink" />
+
+                <!-- Favorite Button -->
+                <ImageButton
+                    android:id="@+id/btn_detail_favorite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/bg_circle_white"
+                    android:contentDescription="Favorite"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_favorite_border"
+                    app:tint="@color/primary_chili" />
+            </FrameLayout>
+
+            <!-- Food Info Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/surface_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Tags Row: Category, Veg Badge, Rating -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_veg_badge"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="Veg or Non-Veg"
+                        android:src="@drawable/ic_non_veg" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/chili_tint"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:text="Burgers"
+                        android:textColor="@color/primary_chili"
+                        android:textSize="11sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/mist"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Rating"
+                            android:src="@drawable/ic_star_filled"
+                            app:tint="@color/accent_butter" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="4.8"
+                            android:textColor="@color/text_ink"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Title & Price -->
+                <TextView
+                    android:id="@+id/tv_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Classic Cheeseburger"
+                    android:textColor="@color/text_ink"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_base_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="$8.99"
+                    android:textColor="@color/primary_chili"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="4dp"
+                    android:text="A mouthwatering flame-grilled beef patty layered with melted cheddar cheese, crisp lettuce, ripe tomatoes, and signature gourmet sauce on a toasted brioche bun."
+                    android:textColor="@color/text_caption"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Options & Add-ons Container -->
+            <LinearLayout
+                android:id="@+id/layout_detail_options_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/surface_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Sizes Section -->
+                <LinearLayout
+                    android:id="@+id/layout_sizes_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Choose Size"
+                        android:textColor="@color/text_ink"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Select 1 option"
+                        android:textColor="@color/text_caption"
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_detail_sizes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- Add-ons Section -->
+                <LinearLayout
+                    android:id="@+id/layout_addons_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Add-ons &amp; Extras"
+                        android:textColor="@color/text_ink"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Select any extra items"
+                        android:textColor="@color/text_caption"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_detail_addons_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+                </LinearLayout>
+
+                <!-- Special Instructions -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Special Instructions"
+                    android:textColor="@color/text_ink"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/et_detail_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_chip_white"
+                    android:backgroundTint="@color/mist"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="e.g. Less spicy, extra sauce on the side"
+                    android:inputType="text"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/text_ink"
+                    android:textColorHint="@color/text_caption"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Sticky Bottom Bar -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:cardBackgroundColor="@color/surface_card"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="16dp"
+        app:strokeColor="@color/border_line"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp">
+
+            <!-- Stepper Container -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_chip_white"
+                android:backgroundTint="@color/mist"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="6dp">
+
+                <ImageButton
+                    android:id="@+id/btn_detail_minus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Decrease"
+                    android:src="@drawable/ic_remove"
+                    app:tint="@color/text_ink" />
+
+                <TextView
+                    android:id="@+id/tv_detail_qty"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/text_ink"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/btn_detail_plus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Increase"
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/text_ink" />
+            </LinearLayout>
+
+            <!-- Add to Cart Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_detail_add_to_cart"
+                style="@style/Widget.TastyGo.Button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Add to Cart • $8.99"
+                app:icon="@drawable/ic_shopping_cart"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

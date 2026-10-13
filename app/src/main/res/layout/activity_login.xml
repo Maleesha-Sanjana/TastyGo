@@ -139,7 +139,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="32dp"
                 app:cardBackgroundColor="@color/surface_card"
                 app:cardCornerRadius="16dp"
                 app:strokeColor="@color/border_line"
@@ -155,18 +155,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Demo Accounts Seeded"
-                        android:textColor="@color/primary_chili"
+                        android:text="Tap to Quick-Fill Demo Account:"
+                        android:textColor="@color/text_ink"
                         android:textSize="@dimen/text_caption" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Admin: admin@tastygo.com / Admin@123\nUser: user@tastygo.com / User@123"
-                        android:textColor="@color/text_caption"
-                        android:textSize="11sp" />
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_fill_admin"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/primary_chili_tint"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Fill Admin (Phase 3)"
+                            android:textColor="@color/primary_chili"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_fill_user"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/accent_butter_light"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Fill Customer"
+                            android:textColor="@color/text_ink"
+                            android:textSize="11sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

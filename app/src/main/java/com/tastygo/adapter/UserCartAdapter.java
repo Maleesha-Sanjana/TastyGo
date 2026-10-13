@@ -1,0 +1,127 @@
+package com.tastygo.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.tastygo.R;
+import com.tastygo.model.CartItem;
+import com.tastygo.util.ImageUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartViewHolder> {
+
+    public interface OnCartItemActionListener {
+        void onQuantityChanged(CartItem item, int newQuantity);
+        void onItemDeleted(CartItem item);
+    }
+
+    private final Context context;
+    private final List<CartItem> items = new ArrayList<>();
+    private final OnCartItemActionListener listener;
+
+    public UserCartAdapter(Context context, OnCartItemActionListener listener) {
+        this.context = context;
+        this.listener = listener;
+    }
+
+    public void setItems(List<CartItem> newItems) {
+        items.clear();
+        if (newItems != null) {
+            items.addAll(newItems);
+        }
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_cart, parent, false);
+        return new CartViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+        CartItem item = items.get(position);
+
+        holder.tvName.setText(item.getFoodName());
+
+        StringBuilder customizations = new StringBuilder();
+        if (item.getSize() != null && !item.getSize().trim().isEmpty()) {
+            customizations.append("Size: ").append(item.getSize());
+        }
+        if (item.getAddons() != null && !item.getAddons().trim().isEmpty()) {
+            if (customizations.length() > 0) customizations.append(" • ");
+            customizations.append(item.getAddons());
+        }
+        if (customizations.length() == 0) {
+            holder.tvCustomizations.setVisibility(View.GONE);
+        } else {
+            holder.tvCustomizations.setVisibility(View.VISIBLE);
+            holder.tvCustomizations.setText(customizations.toString());
+        }
+
+        holder.tvPrice.setText(String.format(Locale.US, "$%.2f", item.getItemTotal()));
+        holder.tvQty.setText(String.valueOf(item.getQuantity()));
+
+        ImageUtil.loadImage(context, item.getFoodImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);
+
+        holder.btnMinus.setOnClickListener(v -> {
+            int newQty = item.getQuantity() - 1;
+            if (listener != null) {
+                listener.onQuantityChanged(item, newQty);
+            }
+        });
+
+        holder.btnPlus.setOnClickListener(v -> {
+            int newQty = item.getQuantity() + 1;
+            if (listener != null) {
+                listener.onQuantityChanged(item, newQty);
+            }
+        });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemDeleted(item);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    static class CartViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivThumb;
+        TextView tvName;
+        TextView tvCustomizations;
+        TextView tvPrice;
+        TextView tvQty;
+        ImageButton btnMinus;
+        ImageButton btnPlus;
+        ImageButton btnDelete;
+
+        public CartViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ivThumb = itemView.findViewById(R.id.iv_cart_food_thumb);
+            tvName = itemView.findViewById(R.id.tv_cart_food_name);
+            tvCustomizations = itemView.findViewById(R.id.tv_cart_customizations);
+            tvPrice = itemView.findViewById(R.id.tv_cart_item_price);
+            tvQty = itemView.findViewById(R.id.tv_cart_qty);
+            btnMinus = itemView.findViewById(R.id.btn_cart_minus);
+            btnPlus = itemView.findViewById(R.id.btn_cart_plus);
+            btnDelete = itemView.findViewById(R.id.btn_cart_delete);
+        }
+    }
+}
