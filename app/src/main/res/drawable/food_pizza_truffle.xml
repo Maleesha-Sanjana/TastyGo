@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path
+        android:fillColor="#F6F3F8"
+        android:pathData="M0,0h200v200h-200z" />
+    <path
+        android:fillColor="#D4A373"
+        android:pathData="M100,20 A80,80 0 1,0 100,180 A80,80 0 1,0 100,20 Z" />
+    <!-- White Cream Base -->
+    <path
+        android:fillColor="#FAEDCD"
+        android:pathData="M100,32 A68,68 0 1,0 100,168 A68,68 0 1,0 100,32 Z" />
+    <!-- Shiitake Mushrooms & Truffles -->
+    <path android:fillColor="#4A3B32" android:pathData="M80,65 Q95,50 110,65 L80,65 Z" />
+    <path android:fillColor="#4A3B32" android:pathData="M120,105 Q135,90 150,105 L120,105 Z" />
+    <path android:fillColor="#4A3B32" android:pathData="M60,115 Q75,100 90,115 L60,115 Z" />
+    <path android:fillColor="#4A3B32" android:pathData="M95,135 Q110,120 125,135 L95,135 Z" />
+    <!-- Truffle Oil Dots -->
+    <path android:fillColor="#231F2E" android:pathData="M100,90 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path android:fillColor="#231F2E" android:pathData="M75,80 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path android:fillColor="#231F2E" android:pathData="M130,80 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+</vector>

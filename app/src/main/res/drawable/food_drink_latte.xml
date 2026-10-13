@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path
+        android:fillColor="#FDE8E3"
+        android:pathData="M0,0h200v200h-200z" />
+    <!-- Iced Cup Body -->
+    <path
+        android:fillColor="#DDB892"
+        android:pathData="M65,70 L75,160 A10,10 0 0,0 85,170 L115,170 A10,10 0 0,0 125,160 L135,70 Z" />
+    <!-- Espresso Layer -->
+    <path
+        android:fillColor="#7F4F24"
+        android:pathData="M66,75 L70,110 L130,110 L134,75 Z" />
+    <!-- Ice Cubes inside -->
+    <path android:fillColor="#EDE0D4" android:pathData="M80,85 h18 v16 h-18 z" />
+    <path android:fillColor="#EDE0D4" android:pathData="M105,95 h18 v16 h-18 z" />
+    <!-- Cream & Salted Caramel Drizzle -->
+    <path
+        android:fillColor="#FFF6D6"
+        android:pathData="M60,65 Q80,55 100,65 Q120,55 140,65 L135,75 L65,75 Z" />
+    <path
+        android:strokeColor="#B08968"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M75,65 Q100,50 125,65" />
+    <!-- Straw -->
+    <path
+        android:strokeColor="#F2542D"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M105,70 L120,25" />
+</vector>

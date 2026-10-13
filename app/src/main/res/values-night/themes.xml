@@ -1,7 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base Application Theme (Night) -->
     <style name="Base.Theme.TastyGo" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/primary_chili</item>
+        <item name="colorPrimaryVariant">@color/primary_chili_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_butter</item>
+        <item name="colorOnSecondary">@color/text_ink</item>
+        <item name="colorSurface">@color/surface_card</item>
+        <item name="colorOnSurface">@color/text_ink</item>
+        <item name="android:colorBackground">@color/bg_mist</item>
+        <item name="colorOnBackground">@color/text_ink</item>
+
+        <!-- Status & Navigation Bar -->
+        <item name="android:statusBarColor">@color/bg_mist</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/surface_card</item>
+
+        <!-- Typography -->
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:fontFamily">@font/poppins</item>
+
+        <!-- Component Default Styles -->
+        <item name="materialButtonStyle">@style/Widget.TastyGo.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.TastyGo.Card</item>
     </style>
 </resources>
