@@ -3,6 +3,7 @@ package com.tastygo.ui.admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,25 +11,31 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.tastygo.R;
-import com.tastygo.databinding.ActivityAdminMainBinding;
 import com.tastygo.ui.auth.LoginActivity;
 import com.tastygo.ui.user.UserMainActivity;
 import com.tastygo.util.SessionManager;
 
 public class AdminMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ActivityAdminMainBinding binding;
+    private DrawerLayout adminDrawerLayout;
+    private NavigationView adminNavView;
+    private MaterialToolbar adminToolbar;
     private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAdminMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_admin_main);
+
+        adminDrawerLayout = findViewById(R.id.admin_drawer_layout);
+        adminNavView = findViewById(R.id.admin_nav_view);
+        adminToolbar = findViewById(R.id.admin_toolbar);
 
         sessionManager = new SessionManager(this);
 
@@ -50,20 +57,20 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
         // Default to Menu Items fragment
         if (savedInstanceState == null) {
             loadFragment(new MenuItemsFragment(), "Menu Items");
-            binding.adminNavView.setCheckedItem(R.id.nav_admin_menu_items);
+            adminNavView.setCheckedItem(R.id.nav_admin_menu_items);
         }
     }
 
     private void setupDrawerAndToolbar() {
-        binding.adminToolbar.setNavigationOnClickListener(v ->
-                binding.adminDrawerLayout.openDrawer(GravityCompat.START));
+        adminToolbar.setNavigationOnClickListener(v ->
+                adminDrawerLayout.openDrawer(GravityCompat.START));
 
-        binding.adminNavView.setNavigationItemSelectedListener(this);
+        adminNavView.setNavigationItemSelectedListener(this);
     }
 
     private void setupHeaderInfo() {
-        if (binding.adminNavView.getHeaderCount() > 0) {
-            android.view.View header = binding.adminNavView.getHeaderView(0);
+        if (adminNavView.getHeaderCount() > 0) {
+            View header = adminNavView.getHeaderView(0);
             TextView tvName = header.findViewById(R.id.tv_header_admin_name);
             TextView tvEmail = header.findViewById(R.id.tv_header_admin_email);
 
@@ -76,8 +83,8 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (binding.adminDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    binding.adminDrawerLayout.closeDrawer(GravityCompat.START);
+                if (adminDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    adminDrawerLayout.closeDrawer(GravityCompat.START);
                 } else {
                     setEnabled(false);
                     getOnBackPressedDispatcher().onBackPressed();
@@ -98,24 +105,16 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
             Toast.makeText(this, "Admin Dashboard will be available in Phase 7", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_admin_orders) {
             Toast.makeText(this, "Order Management will be available in Phase 6", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_admin_users) {
-            Toast.makeText(this, "User Management will be available in Phase 6/7", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_admin_coupons) {
-            Toast.makeText(this, "Coupon Management will be available in Phase 7", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_admin_reports) {
-            Toast.makeText(this, "Reports & Exports will be available in Phase 7", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_admin_settings) {
-            Toast.makeText(this, "Settings will be available in Phase 8", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_admin_logout) {
             performLogout();
         }
 
-        binding.adminDrawerLayout.closeDrawer(GravityCompat.START);
+        adminDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void loadFragment(Fragment fragment, String title) {
-        binding.adminToolbar.setTitle(title);
+        adminToolbar.setTitle(title);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.admin_fragment_container, fragment)

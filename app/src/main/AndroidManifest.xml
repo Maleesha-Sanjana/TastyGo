@@ -50,6 +50,11 @@
             android:name=".ui.user.UserMainActivity"
             android:exported="false" />
 
+        <!-- Food Detail Activity -->
+        <activity
+            android:name=".ui.food.FoodDetailActivity"
+            android:exported="false" />
+
         <!-- Admin Activities -->
         <activity
             android:name=".ui.admin.AdminMainActivity"
