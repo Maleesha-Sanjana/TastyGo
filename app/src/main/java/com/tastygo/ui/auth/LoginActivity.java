@@ -59,20 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegisterActivity.class);
             registerLauncher.launch(intent);
         });
-
-
-        // Quick fill demo buttons
-        binding.btnFillAdmin.setOnClickListener(v -> {
-            binding.etEmail.setText("admin@tastygo.com");
-            binding.etPassword.setText("Admin@123");
-            performLogin();
-        });
-
-        binding.btnFillUser.setOnClickListener(v -> {
-            binding.etEmail.setText("user@tastygo.com");
-            binding.etPassword.setText("User@123");
-            performLogin();
-        });
     }
 
     private void performLogin() {

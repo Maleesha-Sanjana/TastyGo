@@ -64,18 +64,6 @@
                     app:tint="@color/text_caption" />
             </LinearLayout>
 
-            <!-- Customizations (Size, Add-ons) -->
-            <TextView
-                android:id="@+id/tv_cart_customizations"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/poppins_medium"
-                android:maxLines="2"
-                android:text="Medium • Extra Cheese"
-                android:textColor="@color/primary_chili"
-                android:textSize="11sp" />
 
             <!-- Price and Quantity Stepper Row -->
             <LinearLayout

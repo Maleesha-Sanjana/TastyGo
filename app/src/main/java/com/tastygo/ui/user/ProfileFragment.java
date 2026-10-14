@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
 
     private SessionManager sessionManager;
     private OrderDao orderDao;
-    private String currentAddressText = "123 Foodie Blvd, Apt 4B, New York";
+    private String currentAddressText = "Colombo, Sri Lanka";
 
     @Nullable
     @Override
@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment {
         tvName.setText(sessionManager.getUserName());
         tvEmail.setText(sessionManager.getUserEmail());
         tvPhone.setText(sessionManager.getUserPhone() != null && !sessionManager.getUserPhone().isEmpty() ?
-                sessionManager.getUserPhone() : "+1 555 019 2834");
+                sessionManager.getUserPhone() : "+94 77 123 4567");
 
         loadUserAddress();
 
