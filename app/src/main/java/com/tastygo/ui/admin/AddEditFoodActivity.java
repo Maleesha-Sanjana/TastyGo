@@ -94,6 +94,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
                 selectedCategoryId = food.getCategoryId();
                 binding.etFoodName.setText(food.getName());
                 binding.etFoodPrice.setText(String.format(Locale.US, "%.2f", food.getPrice()));
+                binding.etFoodStock.setText(String.valueOf(food.getStock()));
                 binding.etFoodDesc.setText(food.getDescription());
                 binding.switchFoodAvailable.setChecked(food.isAvailable());
 
@@ -104,6 +105,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
                 }
             } else {
                 selectedCategoryId = defaultCat;
+                binding.etFoodStock.setText("20");
             }
         });
     }
@@ -111,11 +113,13 @@ public class AddEditFoodActivity extends AppCompatActivity {
     private void saveFoodItem() {
         String name = binding.etFoodName.getText() != null ? binding.etFoodName.getText().toString().trim() : "";
         String priceStr = binding.etFoodPrice.getText() != null ? binding.etFoodPrice.getText().toString().trim() : "";
+        String stockStr = binding.etFoodStock.getText() != null ? binding.etFoodStock.getText().toString().trim() : "";
         String desc = binding.etFoodDesc.getText() != null ? binding.etFoodDesc.getText().toString().trim() : "";
         boolean isAvailable = binding.switchFoodAvailable.isChecked();
 
         binding.tilFoodName.setError(null);
         binding.tilFoodPrice.setError(null);
+        binding.tilFoodStock.setError(null);
 
         boolean hasError = false;
 
@@ -141,11 +145,29 @@ public class AddEditFoodActivity extends AppCompatActivity {
             }
         }
 
+        int stock = 20;
+        if (TextUtils.isEmpty(stockStr)) {
+            binding.tilFoodStock.setError("Enter initial stock quantity");
+            hasError = true;
+        } else {
+            try {
+                stock = Integer.parseInt(stockStr);
+                if (stock < 0) {
+                    binding.tilFoodStock.setError("Stock cannot be negative");
+                    hasError = true;
+                }
+            } catch (NumberFormatException e) {
+                binding.tilFoodStock.setError("Enter a valid number");
+                hasError = true;
+            }
+        }
+
         if (hasError) return;
 
         binding.btnSaveFoodItem.setEnabled(false);
 
         final double finalPrice = price;
+        final int finalStock = stock;
         final String finalImagePath = currentImagePath.isEmpty() ? "ic_food_placeholder" : currentImagePath;
 
         AppExecutor.getInstance().execute(() -> {
@@ -156,14 +178,22 @@ public class AddEditFoodActivity extends AppCompatActivity {
 
             if (foodId > 0) {
                 // Update
-                FoodItem item = new FoodItem(foodId, catId, name, desc, finalPrice, finalImagePath, isAvailable, false, 0.0);
+                FoodItem item = new FoodItem(foodId, catId, name, desc, finalPrice, finalImagePath, isAvailable && (finalStock > 0), false, 0.0, finalStock);
                 success = foodDao.updateFood(item);
-                foodDao.deleteOptionsForFood(foodId);
             } else {
                 // Insert
-                FoodItem item = new FoodItem(catId, name, desc, finalPrice, finalImagePath, isAvailable, false, 5.0);
+                FoodItem item = new FoodItem(catId, name, desc, finalPrice, finalImagePath, isAvailable && (finalStock > 0), false, 5.0, finalStock);
                 targetFoodId = foodDao.insertFood(item);
                 success = targetFoodId > 0;
+
+                if (success) {
+                    // Seed standard extra cheese and addon options for new food item
+                    foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "SIZE", "Regular Portion", 0.0));
+                    foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "SIZE", "Large Portion", 2.00));
+                    foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "ADDON", "Extra Cheddar Cheese", 0.99));
+                    foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "ADDON", "Melted Mozzarella", 1.25));
+                    foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "ADDON", "Crispy Topping Add-on", 1.49));
+                }
             }
 
             return success;

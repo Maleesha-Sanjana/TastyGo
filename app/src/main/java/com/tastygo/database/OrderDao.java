@@ -79,6 +79,13 @@ public class OrderDao {
                 itemCv.put("quantity", ci.getQuantity());
 
                 db.insertOrThrow(DatabaseHelper.TABLE_ORDER_ITEMS, null, itemCv);
+
+                // Minus stock when customer orders
+                db.execSQL("UPDATE " + DatabaseHelper.TABLE_FOOD_ITEMS +
+                        " SET stock = MAX(0, stock - ?), " +
+                        "     is_available = CASE WHEN (stock - ?) <= 0 THEN 0 ELSE is_available END " +
+                        " WHERE id = ?",
+                        new Object[]{ci.getQuantity(), ci.getQuantity(), ci.getFoodId()});
             }
 
             // Clear the user's cart

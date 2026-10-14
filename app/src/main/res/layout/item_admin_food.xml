@@ -67,16 +67,43 @@
                         android:textSize="@dimen/text_subtitle" />
                 </LinearLayout>
 
-                <!-- Price -->
-                <TextView
-                    android:id="@+id/tv_admin_food_price"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Rs. 850.00"
-                    android:textColor="@color/primary_chili"
-                    android:textSize="@dimen/text_subtitle" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Price -->
+                    <TextView
+                        android:id="@+id/tv_admin_food_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Rs. 850.00"
+                        android:textColor="@color/primary_chili"
+                        android:textSize="@dimen/text_subtitle" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <!-- Stock Count -->
+                    <TextView
+                        android:id="@+id/tv_admin_food_stock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/mist"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:text="Stock: 20"
+                        android:textColor="@color/text_ink"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

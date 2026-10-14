@@ -14,6 +14,7 @@ public class FoodItem implements Serializable {
     private boolean isAvailable;
     private boolean isVeg;
     private double avgRating;
+    private int stock = 20;
 
     // Joined / transient fields
     private String categoryName;
@@ -23,9 +24,10 @@ public class FoodItem implements Serializable {
     public FoodItem() {
         this.isAvailable = true;
         this.isVeg = true;
+        this.stock = 20;
     }
 
-    public FoodItem(long id, long categoryId, String name, String description, double price, String imagePath, boolean isAvailable, boolean isVeg, double avgRating) {
+    public FoodItem(long id, long categoryId, String name, String description, double price, String imagePath, boolean isAvailable, boolean isVeg, double avgRating, int stock) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -35,10 +37,19 @@ public class FoodItem implements Serializable {
         this.isAvailable = isAvailable;
         this.isVeg = isVeg;
         this.avgRating = avgRating;
+        this.stock = stock;
+    }
+
+    public FoodItem(long id, long categoryId, String name, String description, double price, String imagePath, boolean isAvailable, boolean isVeg, double avgRating) {
+        this(id, categoryId, name, description, price, imagePath, isAvailable, isVeg, avgRating, 20);
+    }
+
+    public FoodItem(long categoryId, String name, String description, double price, String imagePath, boolean isAvailable, boolean isVeg, double avgRating, int stock) {
+        this(-1, categoryId, name, description, price, imagePath, isAvailable, isVeg, avgRating, stock);
     }
 
     public FoodItem(long categoryId, String name, String description, double price, String imagePath, boolean isAvailable, boolean isVeg, double avgRating) {
-        this(-1, categoryId, name, description, price, imagePath, isAvailable, isVeg, avgRating);
+        this(-1, categoryId, name, description, price, imagePath, isAvailable, isVeg, avgRating, 20);
     }
 
     public long getId() {
@@ -135,5 +146,17 @@ public class FoodItem implements Serializable {
 
     public void setOptions(List<FoodOption> options) {
         this.options = options != null ? options : new ArrayList<>();
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public boolean isInStock() {
+        return isAvailable && stock > 0;
     }
 }

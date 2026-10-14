@@ -143,6 +143,30 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Stock Quantity -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_food_stock"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="Stock Quantity"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:helperText="Number of items currently available in inventory">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_food_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:text="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Description -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_food_desc"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_option_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cb_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        app:buttonTint="@color/primary_chili" />
+
+    <TextView
+        android:id="@+id/tv_option_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Extra Cheddar Cheese"
+        android:textColor="@color/text_ink"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_option_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chip_white"
+        android:backgroundTint="@color/mist"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
+        android:text="+Rs. 150.00"
+        android:textColor="@color/primary_chili"
+        android:textSize="12sp" />
+
+</LinearLayout>

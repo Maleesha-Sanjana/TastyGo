@@ -58,6 +58,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
                 FoodItem oldItem = items.get(oldItemPosition);
                 FoodItem newItem = newItems.get(newItemPosition);
                 return oldItem.isAvailable() == newItem.isAvailable()
+                        && oldItem.getStock() == newItem.getStock()
                         && Double.compare(oldItem.getPrice(), newItem.getPrice()) == 0
                         && oldItem.getName().equals(newItem.getName());
             }
@@ -101,13 +102,29 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
         // Load food image
         ImageUtil.loadImage(context, item.getImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);
 
+        // Stock and availability handling
+        boolean inStock = item.isInStock();
+        if (inStock) {
+            holder.btnAdd.setEnabled(true);
+            holder.btnAdd.setText("+ Add");
+            holder.btnAdd.setTextColor(context.getColor(R.color.primary_chili));
+            holder.btnAdd.setBackgroundTintList(android.content.res.ColorStateList.valueOf(context.getColor(R.color.chili_tint)));
+            holder.itemView.setAlpha(1.0f);
+        } else {
+            holder.btnAdd.setEnabled(false);
+            holder.btnAdd.setText("Sold Out");
+            holder.btnAdd.setTextColor(context.getColor(R.color.text_caption));
+            holder.btnAdd.setBackgroundTintList(android.content.res.ColorStateList.valueOf(context.getColor(R.color.mist)));
+            holder.itemView.setAlpha(0.65f);
+        }
+
         // Click listeners
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onFoodClick(item);
         });
 
         holder.btnAdd.setOnClickListener(v -> {
-            if (listener != null) listener.onAddClick(item);
+            if (listener != null && inStock) listener.onAddClick(item);
         });
     }
 

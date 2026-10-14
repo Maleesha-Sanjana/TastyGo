@@ -58,6 +58,23 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartVi
         holder.tvPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getItemTotal()));
         holder.tvQty.setText(String.valueOf(item.getQuantity()));
 
+        // Display customized size, extra cheese, and addons
+        StringBuilder optionsText = new StringBuilder();
+        if (item.getSize() != null && !item.getSize().trim().isEmpty()) {
+            optionsText.append(item.getSize().trim());
+        }
+        if (item.getAddons() != null && !item.getAddons().trim().isEmpty()) {
+            if (optionsText.length() > 0) optionsText.append(" • ");
+            optionsText.append(item.getAddons().trim());
+        }
+
+        if (optionsText.length() > 0) {
+            holder.tvOptions.setVisibility(View.VISIBLE);
+            holder.tvOptions.setText(optionsText.toString());
+        } else {
+            holder.tvOptions.setVisibility(View.GONE);
+        }
+
         ImageUtil.loadImage(context, item.getFoodImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);
 
         holder.btnMinus.setOnClickListener(v -> {
@@ -89,6 +106,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartVi
     static class CartViewHolder extends RecyclerView.ViewHolder {
         ImageView ivThumb;
         TextView tvName;
+        TextView tvOptions;
         TextView tvPrice;
         TextView tvQty;
         ImageButton btnMinus;
@@ -99,6 +117,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartVi
             super(itemView);
             ivThumb = itemView.findViewById(R.id.iv_cart_food_thumb);
             tvName = itemView.findViewById(R.id.tv_cart_food_name);
+            tvOptions = itemView.findViewById(R.id.tv_cart_item_options);
             tvPrice = itemView.findViewById(R.id.tv_cart_item_price);
             tvQty = itemView.findViewById(R.id.tv_cart_qty);
             btnMinus = itemView.findViewById(R.id.btn_cart_minus);

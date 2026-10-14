@@ -242,6 +242,7 @@ public class FoodDao {
         cv.put("is_available", item.isAvailable() ? 1 : 0);
         cv.put("is_veg", item.isVeg() ? 1 : 0);
         cv.put("avg_rating", item.getAvgRating());
+        cv.put("stock", item.getStock());
 
         return db.insert(DatabaseHelper.TABLE_FOOD_ITEMS, null, cv);
     }
@@ -256,9 +257,19 @@ public class FoodDao {
         cv.put("image_path", item.getImagePath());
         cv.put("is_available", item.isAvailable() ? 1 : 0);
         cv.put("is_veg", item.isVeg() ? 1 : 0);
+        cv.put("stock", item.getStock());
 
         return db.update(DatabaseHelper.TABLE_FOOD_ITEMS, cv, "id = ?",
                 new String[]{String.valueOf(item.getId())}) > 0;
+    }
+
+    public boolean updateStock(long foodId, int newStock) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("stock", Math.max(0, newStock));
+        cv.put("is_available", newStock > 0 ? 1 : 0);
+        return db.update(DatabaseHelper.TABLE_FOOD_ITEMS, cv, "id = ?",
+                new String[]{String.valueOf(foodId)}) > 0;
     }
 
     public boolean setAvailability(long foodId, boolean available) {
@@ -397,6 +408,13 @@ public class FoodDao {
         item.setAvailable(cursor.getInt(cursor.getColumnIndexOrThrow("is_available")) == 1);
         item.setVeg(cursor.getInt(cursor.getColumnIndexOrThrow("is_veg")) == 1);
         item.setAvgRating(cursor.getDouble(cursor.getColumnIndexOrThrow("avg_rating")));
+
+        int stockIdx = cursor.getColumnIndex("stock");
+        if (stockIdx != -1 && !cursor.isNull(stockIdx)) {
+            item.setStock(cursor.getInt(stockIdx));
+        } else {
+            item.setStock(20);
+        }
 
         int catIdx = cursor.getColumnIndex("category_name");
         if (catIdx != -1) {

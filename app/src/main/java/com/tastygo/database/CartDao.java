@@ -47,7 +47,13 @@ public class CartDao {
                     item.setAddons(cursor.getString(cursor.getColumnIndexOrThrow("addons")));
                     item.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
                     item.setFoodName(cursor.getString(cursor.getColumnIndexOrThrow("food_name")));
-                    item.setUnitPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("food_price")));
+
+                    int unitPriceIdx = cursor.getColumnIndex("unit_price");
+                    double unitPrice = (unitPriceIdx != -1 && !cursor.isNull(unitPriceIdx) && cursor.getDouble(unitPriceIdx) > 0)
+                            ? cursor.getDouble(unitPriceIdx)
+                            : cursor.getDouble(cursor.getColumnIndexOrThrow("food_price"));
+                    item.setUnitPrice(unitPrice);
+
                     item.setFoodImagePath(cursor.getString(cursor.getColumnIndexOrThrow("image_path")));
                     item.setVeg(cursor.getInt(cursor.getColumnIndexOrThrow("is_veg")) == 1);
                     list.add(item);
@@ -82,6 +88,9 @@ public class CartDao {
 
                 ContentValues cv = new ContentValues();
                 cv.put("quantity", newQty);
+                if (item.getUnitPrice() > 0) {
+                    cv.put("unit_price", item.getUnitPrice());
+                }
                 if (item.getNote() != null && !item.getNote().isEmpty()) {
                     cv.put("note", item.getNote());
                 }
@@ -98,6 +107,9 @@ public class CartDao {
         cv.put("quantity", item.getQuantity());
         cv.put("size", sizeVal);
         cv.put("addons", addonsVal);
+        if (item.getUnitPrice() > 0) {
+            cv.put("unit_price", item.getUnitPrice());
+        }
         cv.put("note", item.getNote() != null ? item.getNote() : "");
 
         return db.insert(DatabaseHelper.TABLE_CART_ITEMS, null, cv);

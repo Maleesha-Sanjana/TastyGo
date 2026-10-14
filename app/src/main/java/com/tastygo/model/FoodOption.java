@@ -69,6 +69,19 @@ public class FoodOption implements Serializable {
     }
 
     public boolean isAddon() {
-        return "ADDON".equalsIgnoreCase(type);
+        return "ADDON".equalsIgnoreCase(type) || "CHEESE".equalsIgnoreCase(type);
+    }
+
+    public boolean isCheese() {
+        if (!isAddon()) return false;
+        String lower = (name != null ? name : "").toLowerCase(java.util.Locale.US);
+        return lower.contains("cheese") || lower.contains("mozzarella")
+                || lower.contains("cheddar") || lower.contains("parmesan")
+                || lower.contains("gouda") || lower.contains("burrata")
+                || "CHEESE".equalsIgnoreCase(type);
+    }
+
+    public boolean isGeneralAddon() {
+        return isAddon() && !isCheese();
     }
 }
