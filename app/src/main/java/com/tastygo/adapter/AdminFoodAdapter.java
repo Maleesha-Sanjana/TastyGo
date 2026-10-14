@@ -75,18 +75,7 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
             Context context = itemView.getContext();
 
             binding.tvAdminFoodName.setText(item.getName());
-            binding.tvAdminFoodPrice.setText(String.format(Locale.US, "$%.2f", item.getPrice()));
-
-            String catName = item.getCategoryName();
-            if (catName != null && !catName.isEmpty()) {
-                binding.tvAdminFoodCategory.setText(catName);
-                binding.tvAdminFoodCategory.setVisibility(ViewGroup.VISIBLE);
-            } else {
-                binding.tvAdminFoodCategory.setVisibility(ViewGroup.GONE);
-            }
-
-            // Veg vs Non-Veg
-            binding.ivAdminVegIndicator.setImageResource(item.isVeg() ? R.drawable.ic_veg : R.drawable.ic_non_veg);
+            binding.tvAdminFoodPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getPrice()));
 
             // Load Food Thumbnail
             ImageUtil.loadImage(context, item.getImagePath(), binding.ivAdminFoodThumb, R.drawable.ic_food_placeholder);

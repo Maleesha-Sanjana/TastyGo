@@ -120,27 +120,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Category Dropdown -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_food_category"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:hint="Category"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/actv_food_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <!-- Price -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_food_price"
@@ -153,7 +132,7 @@
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
-                app:prefixText="$ ">
+                app:prefixText="Rs. ">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_food_price"
@@ -210,42 +189,6 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:contentDescription="Veg"
-                            android:src="@drawable/ic_veg" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="Vegetarian Dish"
-                            android:textColor="@color/text_ink"
-                            android:textSize="@dimen/text_body" />
-
-                        <com.google.android.material.materialswitch.MaterialSwitch
-                            android:id="@+id/switch_food_veg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:thumbTint="@color/white"
-                            app:trackTint="@color/veg_green" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginVertical="10dp"
-                        android:background="@color/border_line" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -266,79 +209,6 @@
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- SECTION: Size Options -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Size Options"
-                    android:textColor="@color/text_ink"
-                    android:textSize="@dimen/text_subtitle" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_add_size_option"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:backgroundTint="@color/primary_chili_tint"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="+ Add Size"
-                    android:textColor="@color/primary_chili"
-                    android:textSize="12sp"
-                    app:iconTint="@color/primary_chili" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_sizes_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false" />
-
-            <!-- SECTION: Add-ons -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Add-ons &amp; Extras"
-                    android:textColor="@color/text_ink"
-                    android:textSize="@dimen/text_subtitle" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_add_addon_option"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:backgroundTint="@color/accent_butter_light"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="+ Add Extra"
-                    android:textColor="@color/text_ink"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_addons_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false" />
 
             <!-- Save Item Button (52dp height, 16dp radius) -->
             <com.google.android.material.button.MaterialButton

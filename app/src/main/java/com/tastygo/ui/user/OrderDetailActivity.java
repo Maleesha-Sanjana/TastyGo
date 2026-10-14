@@ -237,18 +237,18 @@ public class OrderDetailActivity extends AppCompatActivity {
         populateItems(order.getItems(), Order.STATUS_DELIVERED.equalsIgnoreCase(status));
 
         // Bill Breakdown
-        tvSubtotal.setText(String.format(Locale.US, "$%.2f", order.getSubtotal()));
-        tvDeliveryFee.setText(String.format(Locale.US, "$%.2f", order.getDeliveryFee()));
-        tvTax.setText(String.format(Locale.US, "$%.2f", order.getTax()));
+        tvSubtotal.setText(String.format(Locale.US, "Rs. %.2f", order.getSubtotal()));
+        tvDeliveryFee.setText(String.format(Locale.US, "Rs. %.2f", order.getDeliveryFee()));
+        tvTax.setText(String.format(Locale.US, "Rs. %.2f", order.getTax()));
 
         if (order.getDiscount() > 0) {
             layoutDiscount.setVisibility(View.VISIBLE);
-            tvDiscount.setText(String.format(Locale.US, "-$%.2f", order.getDiscount()));
+            tvDiscount.setText(String.format(Locale.US, "-Rs. %.2f", order.getDiscount()));
         } else {
             layoutDiscount.setVisibility(View.GONE);
         }
 
-        tvGrandTotal.setText(String.format(Locale.US, "$%.2f", order.getTotal()));
+        tvGrandTotal.setText(String.format(Locale.US, "Rs. %.2f", order.getTotal()));
 
         // Actions visibility
         if (order.canBeCancelled()) {
@@ -344,7 +344,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             text1.setTypeface(null, android.graphics.Typeface.BOLD);
 
             double lineTotal = item.getPriceSnapshot() * item.getQuantity();
-            text2.setText(String.format(Locale.US, "$%.2f ($%.2f each)", lineTotal, item.getPriceSnapshot()));
+            text2.setText(String.format(Locale.US, "Rs. %.2f (Rs. %.2f each)", lineTotal, item.getPriceSnapshot()));
             text2.setTextColor(ContextCompat.getColor(this, R.color.text_caption));
             text2.setTextSize(12);
 

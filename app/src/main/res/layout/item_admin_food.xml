@@ -54,49 +54,17 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!-- Veg / Non-Veg Icon -->
-                    <ImageView
-                        android:id="@+id/iv_admin_veg_indicator"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:contentDescription="Dietary indicator"
-                        android:src="@drawable/ic_veg" />
-
                     <!-- Food Name -->
                     <TextView
                         android:id="@+id/tv_admin_food_name"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
                         android:ellipsize="end"
                         android:fontFamily="@font/poppins_semibold"
                         android:maxLines="1"
                         android:text="Classic Cheeseburger"
                         android:textColor="@color/text_ink"
                         android:textSize="@dimen/text_subtitle" />
-                </LinearLayout>
-
-                <!-- Category Tag -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_admin_food_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_food_placeholder"
-                        android:backgroundTint="@color/primary_chili_tint"
-                        android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="2dp"
-                        android:text="Burgers"
-                        android:textColor="@color/primary_chili"
-                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <!-- Price -->
@@ -106,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="$8.99"
+                    android:text="Rs. 850.00"
                     android:textColor="@color/primary_chili"
                     android:textSize="@dimen/text_subtitle" />
 

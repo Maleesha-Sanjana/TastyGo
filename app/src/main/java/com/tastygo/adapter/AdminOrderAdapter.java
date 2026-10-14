@@ -140,7 +140,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
         }
 
         // Price & Payment
-        holder.tvTotal.setText(String.format(Locale.US, "$%.2f", order.getTotal()));
+        holder.tvTotal.setText(String.format(Locale.US, "Rs. %.2f", order.getTotal()));
         holder.tvPaymentMethod.setText("Payment: " + order.getPaymentMethod());
 
         // Buttons

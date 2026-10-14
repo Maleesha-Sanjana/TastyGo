@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="$9.99"
+                    android:text="Rs. 950.00"
                     android:textColor="@color/primary_chili"
                     android:textSize="15sp" />
 

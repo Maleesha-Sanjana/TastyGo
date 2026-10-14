@@ -71,7 +71,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartVi
             holder.tvCustomizations.setText(customizations.toString());
         }
 
-        holder.tvPrice.setText(String.format(Locale.US, "$%.2f", item.getItemTotal()));
+        holder.tvPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getItemTotal()));
         holder.tvQty.setText(String.valueOf(item.getQuantity()));
 
         ImageUtil.loadImage(context, item.getFoodImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);

@@ -62,44 +62,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Horizontal Filter Chips Scroll -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="4dp"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_admin_categories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleLine="true"
-                app:singleSelection="true">
-
-                <!-- Chip "All" -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_admin_all"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="All Items" />
-
-                <!-- Veg Only Chip -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_admin_veg_only"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="🌱 Veg Only" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
         <!-- Total Items Counter Label -->
         <TextView
             android:id="@+id/tv_admin_items_count"

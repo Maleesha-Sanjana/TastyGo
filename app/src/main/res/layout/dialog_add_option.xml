@@ -42,12 +42,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:hint="Extra Price ($)"
+        android:hint="Extra Price (Rs.)"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
         app:boxCornerRadiusTopStart="14dp"
-        app:prefixText="$ ">
+        app:prefixText="Rs. ">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_option_extra_price"
