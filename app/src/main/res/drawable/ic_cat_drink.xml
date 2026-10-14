@@ -3,15 +3,15 @@
     android:height="48dp"
     android:viewportWidth="48"
     android:viewportHeight="48">
-    <!-- Cup Body -->
+
     <path
         android:fillColor="#FFC93C"
         android:pathData="M14,18L18,40A2,2 0 0,0 20,42L28,42A2,2 0 0,0 30,40L34,18L14,18Z" />
-    <!-- Cup Lid -->
+
     <path
         android:fillColor="#231F2E"
         android:pathData="M12,15L36,15A2,2 0 0,1 38,17L38,18L10,18L10,17A2,2 0 0,1 12,15Z" />
-    <!-- Straw -->
+
     <path
         android:strokeColor="#F2542D"
         android:strokeWidth="3"

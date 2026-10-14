@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class OrderItem implements Serializable {
     private long id;
     private long orderId;
-    private Long foodId; // nullable if food was deleted
+    private Long foodId;
     private String nameSnapshot;
     private double priceSnapshot;
     private int quantity;

@@ -19,10 +19,6 @@ public class ImageUtil {
 
     private static final String DIRECTORY_FOOD_IMAGES = "food_images";
 
-    /**
-     * Copies an image from a URI (such as picked from the gallery) into internal app storage.
-     * Returns the absolute path of the saved file.
-     */
     public static String saveImageToInternalStorage(Context context, Uri sourceUri) {
         if (context == null || sourceUri == null) {
             return null;
@@ -53,46 +49,127 @@ public class ImageUtil {
         }
     }
 
-    /**
-     * Loads an image into an ImageView using Glide with caching and placeholder.
-     * Supports both file paths on internal storage and drawable resource identifiers.
-     */
+    public static int getDrawableResForPath(Context context, String path) {
+        if (path == null || path.trim().isEmpty()) {
+            return R.drawable.real_food_burger;
+        }
+        String lower = path.toLowerCase().trim();
+        if (lower.contains("pizza") || lower.contains("margherita") || lower.contains("pepperoni") || lower.contains("truffle")) {
+            return R.drawable.real_food_pizza;
+        }
+        if (lower.contains("ramen") || lower.contains("chashu") || lower.contains("tonkotsu")) {
+            return R.drawable.real_food_ramen;
+        }
+        if (lower.contains("padthai") || lower.contains("pad_thai") || lower.contains("asian") || lower.contains("noodle") || lower.contains("sichuan")) {
+            return R.drawable.real_food_padthai;
+        }
+        if (lower.contains("smoothie") || lower.contains("mango") || lower.contains("juice") || lower.contains("shake")) {
+            return R.drawable.real_food_smoothie;
+        }
+        if (lower.contains("cake") || lower.contains("dessert") || lower.contains("chocolate") || lower.contains("lava")) {
+            return R.drawable.real_food_dessert;
+        }
+        if (lower.contains("latte") || lower.contains("coffee") || lower.contains("drink") || lower.contains("tea") || lower.contains("caramel")) {
+            return R.drawable.real_food_latte;
+        }
+        if (lower.contains("promo") || lower.contains("dish")) {
+            return R.drawable.real_promo_dish;
+        }
+        if (lower.contains("burger") || lower.contains("bbq") || lower.contains("veggie") || lower.contains("patty") || lower.contains("cheeseburger")) {
+            return R.drawable.real_food_burger;
+        }
+
+        if (context != null) {
+            try {
+                int resId = context.getResources().getIdentifier(lower, "drawable", context.getPackageName());
+                if (resId != 0) {
+                    return resId;
+                }
+            } catch (Exception ignored) {}
+        }
+        return R.drawable.real_food_burger;
+    }
+
+    public static String mapToRealPhoto(String path) {
+        if (path == null || path.trim().isEmpty() || "ic_food_placeholder".equalsIgnoreCase(path)) {
+            return "real_food_burger";
+        }
+        if (path.startsWith("/")) {
+            return path;
+        }
+        String lower = path.toLowerCase().trim();
+        if (lower.contains("pizza") || lower.contains("margherita") || lower.contains("pepperoni") || lower.contains("truffle")) {
+            return "real_food_pizza";
+        }
+        if (lower.contains("ramen") || lower.contains("chashu") || lower.contains("tonkotsu")) {
+            return "real_food_ramen";
+        }
+        if (lower.contains("padthai") || lower.contains("pad_thai") || lower.contains("asian") || lower.contains("noodle") || lower.contains("sichuan")) {
+            return "real_food_padthai";
+        }
+        if (lower.contains("smoothie") || lower.contains("mango") || lower.contains("juice") || lower.contains("shake")) {
+            return "real_food_smoothie";
+        }
+        if (lower.contains("cake") || lower.contains("dessert") || lower.contains("chocolate") || lower.contains("lava")) {
+            return "real_food_dessert";
+        }
+        if (lower.contains("latte") || lower.contains("coffee") || lower.contains("drink") || lower.contains("tea") || lower.contains("caramel")) {
+            return "real_food_latte";
+        }
+        if (lower.contains("promo") || lower.contains("dish")) {
+            return "real_promo_dish";
+        }
+        if (lower.contains("burger") || lower.contains("bbq") || lower.contains("veggie") || lower.contains("patty") || lower.contains("cheeseburger")) {
+            return "real_food_burger";
+        }
+        return "real_food_burger";
+    }
+
     public static void loadImage(Context context, String path, ImageView imageView, int placeholderRes) {
         if (context == null || imageView == null) {
             return;
         }
 
-        if (path == null || path.trim().isEmpty()) {
-            imageView.setImageResource(placeholderRes);
-            return;
-        }
-
-        // Check if path is a drawable resource name
-        if (!path.startsWith("/")) {
-            int resId = context.getResources().getIdentifier(path, "drawable", context.getPackageName());
-            if (resId != 0) {
-                Glide.with(context)
-                        .load(resId)
-                        .placeholder(placeholderRes)
-                        .error(placeholderRes)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerCrop()
-                        .into(imageView);
+        if (context instanceof android.app.Activity) {
+            android.app.Activity activity = (android.app.Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
                 return;
             }
         }
 
-        File file = new File(path);
-        if (file.exists()) {
+        int targetResId = getDrawableResForPath(context, path);
+
+        imageView.setImageResource(targetResId);
+
+        if (path != null && path.startsWith("/")) {
+            File file = new File(path);
+            if (file.exists()) {
+                try {
+                    Glide.with(context)
+                            .load(file)
+                            .placeholder(targetResId)
+                            .error(targetResId)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(imageView);
+                    return;
+                } catch (Exception e) {
+                    imageView.setImageResource(targetResId);
+                    return;
+                }
+            }
+        }
+
+        try {
             Glide.with(context)
-                    .load(file)
-                    .placeholder(placeholderRes)
-                    .error(placeholderRes)
+                    .load(targetResId)
+                    .placeholder(targetResId)
+                    .error(targetResId)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .into(imageView);
-        } else {
-            imageView.setImageResource(placeholderRes);
+        } catch (Exception e) {
+            imageView.setImageResource(targetResId);
         }
     }
 }

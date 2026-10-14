@@ -3,14 +3,14 @@
     android:height="48dp"
     android:viewportWidth="48"
     android:viewportHeight="48">
-    <!-- Pizza Slice Crust & Base -->
+
     <path
         android:fillColor="#FFC93C"
         android:pathData="M24,42L8,12C12,8 36,8 40,12L24,42Z" />
     <path
         android:fillColor="#F2542D"
         android:pathData="M24,38L12,14C16,10 32,10 36,14L24,38Z" />
-    <!-- Pepperoni Dots -->
+
     <path
         android:fillColor="#962A14"
         android:pathData="M24,20A3,3 0 1,0 24,26A3,3 0 1,0 24,20Z" />

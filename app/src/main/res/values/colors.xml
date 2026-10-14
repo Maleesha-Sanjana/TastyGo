@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand Identity -->
+
     <color name="primary_chili">#F2542D</color>
     <color name="primary_chili_dark">#D93E18</color>
     <color name="primary_chili_tint">#FDE8E3</color>
@@ -19,17 +19,14 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <!-- Typography -->
     <color name="text_ink">#231F2E</color>
     <color name="text_caption">#8A8696</color>
     <color name="text_white">#FFFFFF</color>
 
-    <!-- Dietary Markers -->
     <color name="veg_green">#2E9E6B</color>
     <color name="non_veg_red">#E53935</color>
     <color name="rating_gold">#FFB800</color>
 
-    <!-- Order Status Colors -->
     <color name="status_placed_bg">#FDE8E3</color>
     <color name="status_placed_text">#F2542D</color>
     <color name="status_preparing_bg">#FFF4D4</color>
@@ -41,7 +38,6 @@
     <color name="status_cancelled_bg">#EBE9F0</color>
     <color name="status_cancelled_text">#706C7A</color>
 
-    <!-- Overlay & Scrim -->
     <color name="scrim_black_40">#66000000</color>
     <color name="scrim_black_60">#99000000</color>
 </resources>

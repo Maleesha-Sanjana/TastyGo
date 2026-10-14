@@ -33,7 +33,6 @@
         android:layout_marginVertical="12dp"
         android:background="@color/border_line" />
 
-    <!-- Radio Group of Statuses -->
     <RadioGroup
         android:id="@+id/rg_order_status"
         android:layout_width="match_parent"
@@ -92,7 +91,6 @@
 
     </RadioGroup>
 
-    <!-- Dialog Actions -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

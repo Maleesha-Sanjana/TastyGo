@@ -16,9 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Data Access Object for orders, order_items, and addresses.
- */
 public class OrderDao {
 
     private final DatabaseHelper dbHelper;
@@ -27,12 +24,6 @@ public class OrderDao {
         this.dbHelper = DatabaseHelper.getInstance(context);
     }
 
-    // ================= PLACING AN ORDER (SINGLE TRANSACTION) =================
-
-    /**
-     * Atomically creates an order from the user's cart in a single SQLite transaction.
-     * Inserts the order, inserts order_items with name/price snapshots, and clears the cart.
-     */
     public long placeOrder(Order order, List<CartItem> cartItems) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.beginTransaction();
@@ -60,7 +51,6 @@ public class OrderDao {
 
             orderId = db.insertOrThrow(DatabaseHelper.TABLE_ORDERS, null, orderCv);
 
-            // Insert snapshot items
             for (CartItem ci : cartItems) {
                 ContentValues itemCv = new ContentValues();
                 itemCv.put("order_id", orderId);
@@ -79,9 +69,14 @@ public class OrderDao {
                 itemCv.put("quantity", ci.getQuantity());
 
                 db.insertOrThrow(DatabaseHelper.TABLE_ORDER_ITEMS, null, itemCv);
+
+                db.execSQL("UPDATE " + DatabaseHelper.TABLE_FOOD_ITEMS +
+                        " SET stock = MAX(0, stock - ?), " +
+                        "     is_available = CASE WHEN (stock - ?) <= 0 THEN 0 ELSE is_available END " +
+                        " WHERE id = ?",
+                        new Object[]{ci.getQuantity(), ci.getQuantity(), ci.getFoodId()});
             }
 
-            // Clear the user's cart
             db.delete(DatabaseHelper.TABLE_CART_ITEMS, "user_id = ?",
                     new String[]{String.valueOf(order.getUserId())});
 
@@ -91,8 +86,6 @@ public class OrderDao {
             db.endTransaction();
         }
     }
-
-    // ================= ORDER QUERIES =================
 
     public Order getOrderById(long orderId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -218,8 +211,6 @@ public class OrderDao {
         return false;
     }
 
-    // ================= DASHBOARD & REPORT METRICS =================
-
     public int countOrdersToday() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String today = DateUtil.today() + "%";
@@ -292,8 +283,6 @@ public class OrderDao {
         return sales;
     }
 
-    // ================= ADDRESSES =================
-
     public List<Address> getUserAddresses(long userId) {
         List<Address> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -336,7 +325,6 @@ public class OrderDao {
         } finally {
             if (cursor != null) cursor.close();
         }
-        // Fallback to first address if default not explicitly set
         List<Address> all = getUserAddresses(userId);
         return all.isEmpty() ? null : all.get(0);
     }

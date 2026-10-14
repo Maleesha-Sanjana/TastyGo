@@ -9,18 +9,12 @@ public class PasswordUtil {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    /**
-     * Generates a 16-byte random salt encoded as a hex string.
-     */
     public static String generateSalt() {
         byte[] saltBytes = new byte[16];
         RANDOM.nextBytes(saltBytes);
         return bytesToHex(saltBytes);
     }
 
-    /**
-     * Hashes the given password concatenated with the salt using SHA-256.
-     */
     public static String hashPassword(String password, String salt) {
         if (password == null || salt == null) {
             return "";
@@ -35,9 +29,6 @@ public class PasswordUtil {
         }
     }
 
-    /**
-     * Verifies that the plain text password matches the stored hash for the given salt.
-     */
     public static boolean verifyPassword(String password, String salt, String expectedHash) {
         if (password == null || salt == null || expectedHash == null) {
             return false;

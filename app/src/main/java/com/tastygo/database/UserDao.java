@@ -12,9 +12,6 @@ import com.tastygo.util.PasswordUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Data Access Object for users table.
- */
 public class UserDao {
 
     private final DatabaseHelper dbHelper;
@@ -23,10 +20,6 @@ public class UserDao {
         this.dbHelper = DatabaseHelper.getInstance(context);
     }
 
-    /**
-     * Inserts a new user into the database.
-     * Returns the generated row id, or -1 on conflict/failure.
-     */
     public long insert(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -42,9 +35,6 @@ public class UserDao {
         return db.insert(DatabaseHelper.TABLE_USERS, null, cv);
     }
 
-    /**
-     * Finds a user by their unique email.
-     */
     public User findByEmail(String email) {
         if (email == null) return null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -62,9 +52,6 @@ public class UserDao {
         return null;
     }
 
-    /**
-     * Finds a user by their primary key id.
-     */
     public User findById(long id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(DatabaseHelper.TABLE_USERS, null,
@@ -81,9 +68,6 @@ public class UserDao {
         return null;
     }
 
-    /**
-     * Verifies email + phone combination for password reset.
-     */
     public User verifyForPasswordReset(String email, String phone) {
         if (email == null || phone == null) return null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -102,9 +86,6 @@ public class UserDao {
         return null;
     }
 
-    /**
-     * Updates user password with new hash and salt.
-     */
     public boolean updatePassword(long userId, String newHash, String newSalt) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -115,9 +96,6 @@ public class UserDao {
         return rows > 0;
     }
 
-    /**
-     * Updates user profile (name and phone).
-     */
     public boolean updateProfile(long userId, String name, String phone) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -128,9 +106,6 @@ public class UserDao {
         return rows > 0;
     }
 
-    /**
-     * Sets blocked status for a user.
-     */
     public boolean setBlocked(long userId, boolean blocked) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -140,9 +115,6 @@ public class UserDao {
         return rows > 0;
     }
 
-    /**
-     * Returns all registered users ordered by creation date descending.
-     */
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -161,9 +133,6 @@ public class UserDao {
         return list;
     }
 
-    /**
-     * Searches users by name, email, or phone.
-     */
     public List<User> searchUsers(String query) {
         List<User> list = new ArrayList<>();
         if (query == null || query.trim().isEmpty()) {
@@ -187,9 +156,6 @@ public class UserDao {
         return list;
     }
 
-    /**
-     * Counts total registered users (role = USER).
-     */
     public int countTotalUsers() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DatabaseHelper.TABLE_USERS + " WHERE role = 'USER'", null);

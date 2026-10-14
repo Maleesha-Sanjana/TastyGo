@@ -37,7 +37,6 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
     private MaterialButton btnStartShopping;
     private TextView tvCartSubtitle;
 
-    // Bill summary views
     private TextView tvBillSubtotal;
     private TextView tvBillDeliveryFee;
     private TextView tvBillTax;
@@ -114,7 +113,7 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
             long userId = sessionManager.getUserId();
             Order order = new Order();
             order.setUserId(userId);
-            order.setAddressId(1L); // Default Address
+            order.setAddressId(1L);
             order.setSubtotal(currentSubtotal);
             order.setDiscount(0.0);
             order.setDeliveryFee(currentDeliveryFee);
@@ -181,7 +180,6 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
             currentSubtotal += item.getItemTotal();
         }
 
-        // Delivery fee: FREE if subtotal > 30.00
         if (currentSubtotal >= 30.0 || cartItems.isEmpty()) {
             currentDeliveryFee = 0.0;
             tvBillDeliveryFee.setText("FREE");
@@ -190,7 +188,6 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
             tvBillDeliveryFee.setText(String.format(Locale.US, "Rs. %.2f", currentDeliveryFee));
         }
 
-        // Taxes & Charges (8%)
         currentTax = Math.round(currentSubtotal * 0.08 * 100.0) / 100.0;
 
         currentGrandTotal = Math.max(0.0, currentSubtotal + currentDeliveryFee + currentTax);

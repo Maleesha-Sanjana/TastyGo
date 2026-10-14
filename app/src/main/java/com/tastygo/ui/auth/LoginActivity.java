@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.btnLogin.setEnabled(false);
 
-        // Perform authentication off main thread
         AppExecutor.getInstance().execute(() -> {
             User user = userDao.findByEmail(email);
             if (user == null) {
@@ -116,10 +115,8 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Save user session details
             sessionManager.createLoginSession(user.getId(), user.getName(), user.getEmail(), user.getPhone(), user.getRole());
 
-            // Route according to role
             Intent intent;
             if (user.isAdmin()) {
                 intent = new Intent(this, AdminMainActivity.class);

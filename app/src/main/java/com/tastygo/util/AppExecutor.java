@@ -52,9 +52,6 @@ public class AppExecutor {
         return mainHandler;
     }
 
-    /**
-     * Executes a task on the background thread pool and delivers result on the main UI thread.
-     */
     public <T> void execute(Task<T> task, Callback<T> callback) {
         diskIO.execute(() -> {
             T result = task.execute();
@@ -64,9 +61,6 @@ public class AppExecutor {
         });
     }
 
-    /**
-     * Runs a simple runnable in the background without returning a result.
-     */
     public void execute(Runnable runnable) {
         diskIO.execute(runnable);
     }

@@ -17,7 +17,6 @@
             android:orientation="vertical"
             android:paddingBottom="80dp">
 
-            <!-- Top Header: App Branding and Avatar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,7 +35,6 @@
                     android:textColor="@color/primary_chili"
                     android:textSize="22sp" />
 
-                <!-- Profile Circle Icon -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_home_avatar"
                     android:layout_width="40dp"
@@ -57,7 +55,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Search Bar -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -111,26 +108,142 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Section Title Row -->
+            <!-- Promotional Hero Banner matching Figma User 04 Home -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_home_promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/primary_chili"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:strokeWidth="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/card_promo_dish"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:lineSpacingExtra="2dp"
+                            android:text="20% off your\nfirst order"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_promo_coupon_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/bg_chip_white"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="5dp"
+                            android:text="Code: TASTY20"
+                            android:textColor="@color/primary_chili"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_promo_dish"
+                        android:layout_width="94dp"
+                        android:layout_height="94dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        app:cardCornerRadius="47dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp">
+
+                        <ImageView
+                            android:id="@+id/iv_promo_dish"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="Special Offer Dish"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/real_promo_dish" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Categories Header matching Figma User 04 Home -->
+            <TextView
+                android:id="@+id/tv_home_categories_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Categories"
+                android:textColor="@color/text_ink"
+                android:textSize="17sp" />
+
+            <!-- Categories Horizontal Filter Bar -->
+            <HorizontalScrollView
+                android:id="@+id/scroll_home_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layout_category_chips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- Popular now Header with See all matching Figma -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_home_section_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Popular Dishes"
+                    android:text="Popular now"
                     android:textColor="@color/text_ink"
                     android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_home_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="4dp"
+                    android:text="See all"
+                    android:textColor="@color/primary_chili"
+                    android:textSize="13sp" />
             </LinearLayout>
 
-            <!-- Food Items RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_home_foods"
                 android:layout_width="match_parent"
@@ -142,7 +255,6 @@
                 tools:itemCount="4"
                 tools:listitem="@layout/item_user_food" />
 
-            <!-- Empty Search State -->
             <LinearLayout
                 android:id="@+id/layout_home_empty"
                 android:layout_width="match_parent"

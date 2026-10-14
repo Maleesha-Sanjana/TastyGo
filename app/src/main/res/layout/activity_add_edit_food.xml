@@ -38,7 +38,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="40dp">
 
-            <!-- Image Picker Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_food_image_picker"
                 android:layout_width="match_parent"
@@ -61,15 +60,13 @@
                         android:layout_height="match_parent"
                         android:contentDescription="Food preview"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_food_placeholder" />
+                        android:src="@drawable/real_food_burger" />
 
-                    <!-- Overlay Scrim -->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/scrim_black_40" />
 
-                    <!-- Tap to Pick Icon & Text -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,7 +95,6 @@
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Food Name -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_food_name"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -120,7 +116,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Price -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_food_price"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -143,7 +138,29 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Description -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_food_stock"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="Stock Quantity"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:helperText="Number of items currently available in inventory">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_food_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:text="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_food_desc"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -166,7 +183,6 @@
                     android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Switches Card (Veg & In-Stock) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,10 +223,53 @@
                             app:trackTint="@color/success_basil" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/border_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="🔥 Fast Moving Item"
+                                android:textColor="@color/text_ink"
+                                android:textSize="@dimen/text_body" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Show in 'Popular now' section on Home"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_food_popular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            app:thumbTint="@color/white"
+                            app:trackTint="@color/primary_chili" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Save Item Button (52dp height, 16dp radius) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_save_food_item"
                 style="@style/Widget.TastyGo.Button"

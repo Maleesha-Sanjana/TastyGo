@@ -52,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
         String password = binding.etPassword.getText() != null ? binding.etPassword.getText().toString().trim() : "";
         String confirmPassword = binding.etConfirmPassword.getText() != null ? binding.etConfirmPassword.getText().toString().trim() : "";
 
-        // Reset errors
         binding.tilName.setError(null);
         binding.tilEmail.setError(null);
         binding.tilPhone.setError(null);
@@ -112,11 +111,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding.btnRegister.setEnabled(false);
 
-        // Perform uniqueness check & insertion on background thread
         AppExecutor.getInstance().execute(() -> {
             User existing = userDao.findByEmail(email);
             if (existing != null) {
-                return -1L; // Email already exists
+                return -1L;
             }
 
             String salt = PasswordUtil.generateSalt();

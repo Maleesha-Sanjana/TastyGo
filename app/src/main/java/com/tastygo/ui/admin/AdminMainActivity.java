@@ -39,7 +39,6 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
 
         sessionManager = new SessionManager(this);
 
-        // Security check: only ADMIN can access
         if (!sessionManager.isAdmin()) {
             if (sessionManager.isLoggedIn()) {
                 startActivity(new Intent(this, UserMainActivity.class));
@@ -54,7 +53,6 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
         setupHeaderInfo();
         setupBackPressHandler();
 
-        // Default to Menu Items fragment
         if (savedInstanceState == null) {
             loadFragment(new MenuItemsFragment(), "Menu Items");
             adminNavView.setCheckedItem(R.id.nav_admin_menu_items);

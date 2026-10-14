@@ -30,23 +30,19 @@ public class SplashActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
-        // Apply saved theme preference
         if (sessionManager.isDarkMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
 
-        // Initialize database and seed data on background thread
         initializeAppAndRoute();
     }
 
     private void initializeAppAndRoute() {
         AppExecutor.getInstance().execute(() -> {
-            // Force database creation and seed execution if not already done
             DatabaseHelper.getInstance(SplashActivity.this).getWritableDatabase();
 
-            // Small delay for smooth splash presentation
             try {
                 Thread.sleep(1200);
             } catch (InterruptedException ignored) {}

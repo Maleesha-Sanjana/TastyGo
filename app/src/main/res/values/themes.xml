@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base Application Theme -->
+
     <style name="Base.Theme.TastyGo" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Brand Colors -->
+
         <item name="colorPrimary">@color/primary_chili</item>
         <item name="colorPrimaryVariant">@color/primary_chili_dark</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -12,23 +12,19 @@
         <item name="android:colorBackground">@color/bg_mist</item>
         <item name="colorOnBackground">@color/text_ink</item>
 
-        <!-- Status & Navigation Bar -->
         <item name="android:statusBarColor">@color/bg_mist</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/surface_card</item>
 
-        <!-- Typography -->
         <item name="fontFamily">@font/poppins</item>
         <item name="android:fontFamily">@font/poppins</item>
 
-        <!-- Component Default Styles -->
         <item name="materialButtonStyle">@style/Widget.TastyGo.Button</item>
         <item name="materialCardViewStyle">@style/Widget.TastyGo.Card</item>
     </style>
 
     <style name="Theme.TastyGo" parent="Base.Theme.TastyGo" />
 
-    <!-- TastyGo Buttons (52dp height, 16dp radius) -->
     <style name="Widget.TastyGo.Button" parent="Widget.Material3.Button">
         <item name="android:minHeight">@dimen/btn_height</item>
         <item name="shapeAppearance">@style/ShapeAppearance.TastyGo.Button</item>
@@ -64,7 +60,6 @@
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
 
-    <!-- TastyGo Cards (18dp radius) -->
     <style name="Widget.TastyGo.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="shapeAppearance">@style/ShapeAppearance.TastyGo.Card</item>
         <item name="cardBackgroundColor">@color/surface_card</item>
@@ -73,7 +68,6 @@
         <item name="strokeWidth">1dp</item>
     </style>
 
-    <!-- TastyGo Shape Appearances -->
     <style name="ShapeAppearance.TastyGo.Button" parent="ShapeAppearance.Material3.Corner.Medium">
         <item name="cornerSize">@dimen/btn_corner_radius</item>
     </style>
@@ -90,7 +84,6 @@
         <item name="cornerSize">@dimen/chip_corner_radius</item>
     </style>
 
-    <!-- Typography Text Appearances -->
     <style name="TextAppearance.TastyGo.TitleLarge" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="fontFamily">@font/poppins_bold</item>
         <item name="android:fontFamily">@font/poppins_bold</item>

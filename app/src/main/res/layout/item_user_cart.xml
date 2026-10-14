@@ -17,17 +17,15 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <!-- Food Thumb Image -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_cart_food_thumb"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:contentDescription="Food Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/food_burger_classic"
+            android:src="@drawable/real_food_burger"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
-        <!-- Info Area -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,7 +51,6 @@
                     android:textColor="@color/text_ink"
                     android:textSize="15sp" />
 
-                <!-- Remove Item Button -->
                 <ImageButton
                     android:id="@+id/btn_cart_delete"
                     android:layout_width="28dp"
@@ -64,8 +61,19 @@
                     app:tint="@color/text_caption" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_cart_item_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:maxLines="2"
+                android:text="Regular • Extra Cheese"
+                android:textColor="@color/text_caption"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
-            <!-- Price and Quantity Stepper Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +91,6 @@
                     android:textColor="@color/primary_chili"
                     android:textSize="15sp" />
 
-                <!-- Stepper Container -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"

@@ -1,29 +1,3 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
-    <path
-        android:fillColor="#E3F7EC"
-        android:pathData="M0,0h200v200h-200z" />
-    <!-- Bun -->
-    <path
-        android:fillColor="#E9C46A"
-        android:pathData="M40,90 C40,55 70,40 100,40 C130,40 160,55 160,90 Z" />
-    <!-- Avocado / Veggie Layer -->
-    <path
-        android:fillColor="#2A9D8F"
-        android:pathData="M38,92 L162,92 A6,6 0 0,1 168,98 L168,104 A6,6 0 0,1 162,110 L38,110 A6,6 0 0,1 32,104 L32,98 A6,6 0 0,1 38,92 Z" />
-    <!-- Crispy Golden Veggie Patty -->
-    <path
-        android:fillColor="#E76F51"
-        android:pathData="M38,114 L162,114 A8,8 0 0,1 170,122 L170,128 A8,8 0 0,1 162,136 L38,136 A8,8 0 0,1 30,128 L30,122 A8,8 0 0,1 38,114 Z" />
-    <!-- Fresh Greens -->
-    <path
-        android:fillColor="#2E9E6B"
-        android:pathData="M35,134 Q50,146 65,134 Q80,146 95,134 Q110,146 125,134 Q140,146 155,134 Q170,146 165,134 L35,134 Z" />
-    <!-- Bottom Bun -->
-    <path
-        android:fillColor="#E9C46A"
-        android:pathData="M42,142 L158,142 A8,8 0 0,1 166,150 L166,155 C166,168 135,172 100,172 C65,172 34,168 34,155 L34,150 A8,8 0 0,1 42,142 Z" />
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/real_food_burger" />

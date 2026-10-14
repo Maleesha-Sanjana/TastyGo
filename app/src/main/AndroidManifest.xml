@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permissions for Image Picking & Notifications -->
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
@@ -20,7 +19,6 @@
         android:theme="@style/Theme.TastyGo"
         tools:targetApi="34">
 
-        <!-- Splash Activity (App Entry Point) -->
         <activity
             android:name=".ui.auth.SplashActivity"
             android:exported="true"
@@ -31,7 +29,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Auth Activities -->
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="false"
@@ -40,17 +37,15 @@
             android:name=".ui.auth.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <!-- User Main Activity -->
+
         <activity
             android:name=".ui.user.UserMainActivity"
             android:exported="false" />
 
-        <!-- Food Detail Activity -->
         <activity
             android:name=".ui.food.FoodDetailActivity"
             android:exported="false" />
 
-        <!-- Admin Activities -->
         <activity
             android:name=".ui.admin.AdminMainActivity"
             android:exported="false" />

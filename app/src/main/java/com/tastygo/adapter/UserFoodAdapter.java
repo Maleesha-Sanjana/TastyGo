@@ -58,6 +58,8 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
                 FoodItem oldItem = items.get(oldItemPosition);
                 FoodItem newItem = newItems.get(newItemPosition);
                 return oldItem.isAvailable() == newItem.isAvailable()
+                        && oldItem.getStock() == newItem.getStock()
+                        && oldItem.isPopular() == newItem.isPopular()
                         && Double.compare(oldItem.getPrice(), newItem.getPrice()) == 0
                         && oldItem.getName().equals(newItem.getName());
             }
@@ -85,29 +87,45 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
         holder.tvDesc.setText(item.getDescription());
         holder.tvPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getPrice()));
 
+        if (holder.tvPopularBadge != null) {
+            holder.tvPopularBadge.setVisibility(item.isPopular() ? View.VISIBLE : View.GONE);
+        }
+
         String category = item.getCategoryName();
         if (category == null || category.isEmpty()) {
             category = "Tasty Special";
         }
         holder.tvCategory.setText(category);
 
-        // Veg or Non-Veg badge
         if (item.isVeg()) {
             holder.ivVegBadge.setImageResource(R.drawable.ic_veg);
         } else {
             holder.ivVegBadge.setImageResource(R.drawable.ic_non_veg);
         }
 
-        // Load food image
         ImageUtil.loadImage(context, item.getImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);
 
-        // Click listeners
+        boolean inStock = item.isInStock();
+        if (inStock) {
+            holder.btnAdd.setEnabled(true);
+            holder.btnAdd.setText("+ Add");
+            holder.btnAdd.setTextColor(context.getColor(R.color.primary_chili));
+            holder.btnAdd.setBackgroundTintList(android.content.res.ColorStateList.valueOf(context.getColor(R.color.chili_tint)));
+            holder.itemView.setAlpha(1.0f);
+        } else {
+            holder.btnAdd.setEnabled(false);
+            holder.btnAdd.setText("Sold Out");
+            holder.btnAdd.setTextColor(context.getColor(R.color.text_caption));
+            holder.btnAdd.setBackgroundTintList(android.content.res.ColorStateList.valueOf(context.getColor(R.color.mist)));
+            holder.itemView.setAlpha(0.65f);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onFoodClick(item);
         });
 
         holder.btnAdd.setOnClickListener(v -> {
-            if (listener != null) listener.onAddClick(item);
+            if (listener != null && inStock) listener.onAddClick(item);
         });
     }
 
@@ -123,6 +141,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
         TextView tvTitle;
         TextView tvDesc;
         TextView tvPrice;
+        TextView tvPopularBadge;
         MaterialButton btnAdd;
 
         public FoodViewHolder(@NonNull View itemView) {
@@ -133,6 +152,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
             tvTitle = itemView.findViewById(R.id.tv_food_title);
             tvDesc = itemView.findViewById(R.id.tv_food_desc);
             tvPrice = itemView.findViewById(R.id.tv_food_price);
+            tvPopularBadge = itemView.findViewById(R.id.tv_food_popular_badge);
             btnAdd = itemView.findViewById(R.id.btn_quick_add);
         }
     }
