@@ -357,6 +357,19 @@ public class OrderDao {
         return db.insert(DatabaseHelper.TABLE_ADDRESSES, null, cv);
     }
 
+    public boolean saveOrUpdateAddress(long userId, String addressText) {
+        Address def = getDefaultAddress(userId);
+        if (def != null) {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("address_text", addressText);
+            return db.update(DatabaseHelper.TABLE_ADDRESSES, cv, "id = ?", new String[]{String.valueOf(def.getId())}) > 0;
+        } else {
+            Address newAddr = new Address(userId, "Home", addressText, true);
+            return insertAddress(newAddr) > 0;
+        }
+    }
+
     public boolean setDefaultAddress(long userId, long addressId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.beginTransaction();

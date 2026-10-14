@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_chip_white"
+    android:backgroundTint="@color/surface_card"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_dialog_order_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Update Order Status"
+        android:textColor="@color/text_ink"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_dialog_order_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Select new fulfillment stage for #TGO-1001"
+        android:textColor="@color/text_caption"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="12dp"
+        android:background="@color/border_line" />
+
+    <!-- Radio Group of Statuses -->
+    <RadioGroup
+        android:id="@+id/rg_order_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_status_placed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingVertical="8dp"
+            android:text="PLACED (New Order)"
+            android:textColor="@color/text_ink"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_status_preparing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingVertical="8dp"
+            android:text="PREPARING (In the Kitchen)"
+            android:textColor="@color/text_ink"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_status_out_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingVertical="8dp"
+            android:text="OUT_FOR_DELIVERY (On the Way)"
+            android:textColor="@color/text_ink"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_status_delivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingVertical="8dp"
+            android:text="DELIVERED (Completed)"
+            android:textColor="@color/text_ink"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_status_cancelled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingVertical="8dp"
+            android:text="CANCELLED (Void / Rejected)"
+            android:textColor="@color/primary_chili"
+            android:textSize="14sp" />
+
+    </RadioGroup>
+
+    <!-- Dialog Actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dialog_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Dismiss"
+            android:textColor="@color/text_caption"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dialog_save"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/primary_chili"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Apply Status"
+            android:textAllCaps="false"
+            android:textColor="@color/text_white"
+            android:textSize="13sp"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

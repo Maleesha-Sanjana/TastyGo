@@ -99,12 +99,8 @@ public class AdminMainActivity extends AppCompatActivity implements NavigationVi
 
         if (id == R.id.nav_admin_menu_items) {
             loadFragment(new MenuItemsFragment(), "Menu Items");
-        } else if (id == R.id.nav_admin_categories) {
-            loadFragment(new CategoriesFragment(), "Categories");
-        } else if (id == R.id.nav_admin_dashboard) {
-            Toast.makeText(this, "Admin Dashboard will be available in Phase 7", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_admin_orders) {
-            Toast.makeText(this, "Order Management will be available in Phase 6", Toast.LENGTH_SHORT).show();
+            loadFragment(new AdminOrdersFragment(), "Orders");
         } else if (id == R.id.nav_admin_logout) {
             performLogout();
         }

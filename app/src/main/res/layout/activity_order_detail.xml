@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_mist">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_card"
+        app:elevation="1dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_order_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/text_ink"
+            app:title="Order Details"
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:titleTextColor="@color/text_ink" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Order Header Card (Order ID & Status) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_detail_order_id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="#TGO-1001"
+                            android:textColor="@color/text_ink"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_status_badge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chip_white"
+                            android:backgroundTint="@color/status_placed_bg"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:text="PLACED"
+                            android:textColor="@color/status_placed_text"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_detail_date_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Placed on Oct 13, 2026 • 8:30 PM"
+                        android:textColor="@color/text_caption"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Order Status Visual Tracker Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_tracker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Order Tracking"
+                        android:textColor="@color/text_ink"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_tracker_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Estimated delivery in 25-35 minutes"
+                        android:textColor="@color/text_caption"
+                        android:textSize="12sp" />
+
+                    <!-- Step Tracker Container -->
+                    <LinearLayout
+                        android:id="@+id/layout_stepper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <!-- Step 1: Placed -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_step_placed"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="@drawable/bg_circle_white"
+                                android:backgroundTint="@color/primary_chili"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_check_circle"
+                                app:tint="@color/text_white" />
+
+                            <TextView
+                                android:id="@+id/tv_step_placed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Placed"
+                                android:textColor="@color/primary_chili"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- Line 1-2 -->
+                        <View
+                            android:id="@+id/line_step_1_2"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="0.8"
+                            android:background="@color/border_line" />
+
+                        <!-- Step 2: Preparing -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_step_preparing"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="@drawable/bg_circle_white"
+                                android:backgroundTint="@color/mist"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_cooking_pot"
+                                app:tint="@color/text_caption" />
+
+                            <TextView
+                                android:id="@+id/tv_step_preparing"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:text="Cooking"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- Line 2-3 -->
+                        <View
+                            android:id="@+id/line_step_2_3"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="0.8"
+                            android:background="@color/border_line" />
+
+                        <!-- Step 3: Out for Delivery -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_step_out"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="@drawable/bg_circle_white"
+                                android:backgroundTint="@color/mist"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_delivery_dining"
+                                app:tint="@color/text_caption" />
+
+                            <TextView
+                                android:id="@+id/tv_step_out"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:text="On the Way"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- Line 3-4 -->
+                        <View
+                            android:id="@+id/line_step_3_4"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="0.8"
+                            android:background="@color/border_line" />
+
+                        <!-- Step 4: Delivered -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_step_delivered"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="@drawable/bg_circle_white"
+                                android:backgroundTint="@color/mist"
+                                android:padding="6dp"
+                                android:src="@drawable/ic_check_circle"
+                                app:tint="@color/text_caption" />
+
+                            <TextView
+                                android:id="@+id/tv_step_delivered"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:text="Delivered"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Cancelled Message Box (shown if status is CANCELLED) -->
+                    <LinearLayout
+                        android:id="@+id/layout_cancelled_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/chili_tint"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_cancel_circle"
+                            app:tint="@color/primary_chili" />
+
+                        <TextView
+                            android:id="@+id/tv_cancelled_message"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="This order was cancelled."
+                            android:textColor="@color/primary_chili"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Delivery & Contact Details Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Delivery Information"
+                        android:textColor="@color/text_ink"
+                        android:textSize="15sp" />
+
+                    <!-- Address Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/primary_chili" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="742 Evergreen Terrace, Springfield"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Phone Row -->
+                    <LinearLayout
+                        android:id="@+id/layout_detail_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_phone"
+                            app:tint="@color/primary_chili" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="+1 (555) 234-5678"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Order Type & Payment -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_receipt_long"
+                            app:tint="@color/primary_chili" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_payment_info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Cash on Delivery • Standard Delivery"
+                            android:textColor="@color/text_caption"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Note -->
+                    <TextView
+                        android:id="@+id/tv_detail_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/accent_butter_light"
+                        android:fontFamily="@font/poppins_regular"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="6dp"
+                        android:text="Special Instructions: Extra spicy, no onions"
+                        android:textColor="@color/text_ink"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Items Ordered Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Items Ordered"
+                        android:textColor="@color/text_ink"
+                        android:textSize="15sp" />
+
+                    <!-- Dynamically populated items container -->
+                    <LinearLayout
+                        android:id="@+id/layout_items_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Price Breakdown Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Bill Details"
+                        android:textColor="@color/text_ink"
+                        android:textSize="15sp" />
+
+                    <!-- Subtotal -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Item Subtotal"
+                            android:textColor="@color/text_caption"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_subtotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="$25.00"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Delivery Fee -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Delivery Fee"
+                            android:textColor="@color/text_caption"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_delivery_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="$3.00"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Tax -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Taxes &amp; Fees (8%)"
+                            android:textColor="@color/text_caption"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_tax"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="$2.00"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Discount (if any) -->
+                    <LinearLayout
+                        android:id="@+id/layout_detail_discount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Promo Discount"
+                            android:textColor="@color/status_basil"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_discount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="-$5.00"
+                            android:textColor="@color/status_basil"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@color/border_line" />
+
+                    <!-- Grand Total -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Grand Total"
+                            android:textColor="@color/text_ink"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_grand_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="$25.00"
+                            android:textColor="@color/primary_chili"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Customer Actions Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical">
+
+                <!-- Leave a review button (if DELIVERED) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_leave_review"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/accent_butter"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Rate &amp; Review Your Food"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_ink"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_star_filled"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/text_ink" />
+
+                <!-- Cancel Order button (if PLACED) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancel_order"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Cancel Order"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_chili"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:cornerRadius="14dp"
+                    app:strokeColor="@color/primary_chili"
+                    app:strokeWidth="1.5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

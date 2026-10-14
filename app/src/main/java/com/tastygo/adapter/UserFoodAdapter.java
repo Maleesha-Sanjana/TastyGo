@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
 
     public interface OnFoodClickListener {
         void onFoodClick(FoodItem item);
-        void onFavoriteClick(FoodItem item, int position);
         void onAddClick(FoodItem item);
     }
 
@@ -59,8 +57,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
             public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                 FoodItem oldItem = items.get(oldItemPosition);
                 FoodItem newItem = newItems.get(newItemPosition);
-                return oldItem.isFavorite() == newItem.isFavorite()
-                        && oldItem.isAvailable() == newItem.isAvailable()
+                return oldItem.isAvailable() == newItem.isAvailable()
                         && Double.compare(oldItem.getPrice(), newItem.getPrice()) == 0
                         && oldItem.getName().equals(newItem.getName());
             }
@@ -87,7 +84,6 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
         holder.tvTitle.setText(item.getName());
         holder.tvDesc.setText(item.getDescription());
         holder.tvPrice.setText(String.format(Locale.US, "$%.2f", item.getPrice()));
-        holder.tvRating.setText(String.format(Locale.US, "%.1f", item.getAvgRating() > 0 ? item.getAvgRating() : 4.8));
 
         String category = item.getCategoryName();
         if (category == null || category.isEmpty()) {
@@ -102,23 +98,12 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
             holder.ivVegBadge.setImageResource(R.drawable.ic_non_veg);
         }
 
-        // Favorite heart icon
-        if (item.isFavorite()) {
-            holder.btnFavorite.setImageResource(R.drawable.ic_favorite);
-        } else {
-            holder.btnFavorite.setImageResource(R.drawable.ic_favorite_border);
-        }
-
         // Load food image
         ImageUtil.loadImage(context, item.getImagePath(), holder.ivThumb, R.drawable.ic_food_placeholder);
 
         // Click listeners
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onFoodClick(item);
-        });
-
-        holder.btnFavorite.setOnClickListener(v -> {
-            if (listener != null) listener.onFavoriteClick(item, holder.getAdapterPosition());
         });
 
         holder.btnAdd.setOnClickListener(v -> {
@@ -133,9 +118,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
 
     static class FoodViewHolder extends RecyclerView.ViewHolder {
         ImageView ivThumb;
-        ImageButton btnFavorite;
         ImageView ivVegBadge;
-        TextView tvRating;
         TextView tvCategory;
         TextView tvTitle;
         TextView tvDesc;
@@ -145,9 +128,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
             ivThumb = itemView.findViewById(R.id.iv_food_thumb);
-            btnFavorite = itemView.findViewById(R.id.btn_food_favorite);
             ivVegBadge = itemView.findViewById(R.id.iv_food_veg_badge);
-            tvRating = itemView.findViewById(R.id.tv_food_rating);
             tvCategory = itemView.findViewById(R.id.tv_food_category);
             tvTitle = itemView.findViewById(R.id.tv_food_title);
             tvDesc = itemView.findViewById(R.id.tv_food_desc);

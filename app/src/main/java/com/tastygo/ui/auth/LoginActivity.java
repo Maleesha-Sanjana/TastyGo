@@ -60,10 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             registerLauncher.launch(intent);
         });
 
-        binding.tvForgotPassword.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ForgotPasswordActivity.class);
-            startActivity(intent);
-        });
 
         // Quick fill demo buttons
         binding.btnFillAdmin.setOnClickListener(v -> {

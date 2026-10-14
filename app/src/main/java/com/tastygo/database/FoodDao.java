@@ -149,6 +149,10 @@ public class FoodDao {
         return null;
     }
 
+    public FoodItem getFoodItemById(long id) {
+        return getFoodById(id);
+    }
+
     public List<FoodItem> getFoodItemsByCategory(long categoryId) {
         List<FoodItem> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();

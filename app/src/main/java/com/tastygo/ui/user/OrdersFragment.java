@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,9 +23,8 @@ import com.tastygo.util.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class OrdersFragment extends Fragment implements UserOrderAdapter.OnOrderClickListener {
+public class OrdersFragment extends Fragment {
 
     private RecyclerView rvOrders;
     private LinearLayout layoutEmpty;
@@ -51,7 +49,7 @@ public class OrdersFragment extends Fragment implements UserOrderAdapter.OnOrder
         btnBrowse = view.findViewById(R.id.btn_orders_browse);
         tvSubtitle = view.findViewById(R.id.tv_orders_subtitle);
 
-        adapter = new UserOrderAdapter(requireContext(), this);
+        adapter = new UserOrderAdapter(requireContext());
         rvOrders.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvOrders.setAdapter(adapter);
 
@@ -93,11 +91,5 @@ public class OrdersFragment extends Fragment implements UserOrderAdapter.OnOrder
                     }
                 }
         );
-    }
-
-    @Override
-    public void onOrderClick(Order order) {
-        Toast.makeText(requireContext(), String.format(Locale.US, "Order #TGO-%04d: %s ($%.2f)",
-                order.getId(), order.getStatus(), order.getTotal()), Toast.LENGTH_SHORT).show();
     }
 }

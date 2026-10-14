@@ -20,12 +20,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.tastygo.R;
 import com.tastygo.adapter.UserFoodAdapter;
 import com.tastygo.database.FoodDao;
-import com.tastygo.model.Category;
 import com.tastygo.model.FoodItem;
 import com.tastygo.ui.food.FoodDetailActivity;
 import com.tastygo.util.AppExecutor;
@@ -36,12 +33,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClickListener {
 
-    private TextView tvAddress;
     private MaterialCardView cardAvatar;
     private EditText etSearch;
     private ImageButton btnClearSearch;
-    private ChipGroup chipGroupCategories;
-    private Chip chipVegOnly;
     private RecyclerView rvFoods;
     private LinearLayout layoutEmpty;
     private TextView tvSectionTitle;
@@ -51,9 +45,6 @@ public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClic
     private UserFoodAdapter adapter;
 
     private final List<FoodItem> allFoodItems = new ArrayList<>();
-    private final List<Category> allCategories = new ArrayList<>();
-    private long selectedCategoryId = -1; // -1 means All
-    private boolean isVegOnly = false;
     private String currentSearchQuery = "";
 
     @Nullable
@@ -78,17 +69,12 @@ public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClic
     }
 
     private void initViews(View view) {
-        tvAddress = view.findViewById(R.id.tv_home_address);
         cardAvatar = view.findViewById(R.id.card_home_avatar);
         etSearch = view.findViewById(R.id.et_home_search);
         btnClearSearch = view.findViewById(R.id.btn_home_search_clear);
-        chipGroupCategories = view.findViewById(R.id.chip_group_home_categories);
-        chipVegOnly = view.findViewById(R.id.chip_home_veg_only);
         rvFoods = view.findViewById(R.id.rv_home_foods);
         layoutEmpty = view.findViewById(R.id.layout_home_empty);
         tvSectionTitle = view.findViewById(R.id.tv_home_section_title);
-
-        tvAddress.setText("123 Foodie Blvd, Apt 4B");
 
         cardAvatar.setOnClickListener(v -> {
             if (getActivity() instanceof UserMainActivity) {
@@ -124,70 +110,19 @@ public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClic
             currentSearchQuery = "";
             applyFilter();
         });
-
-        chipVegOnly.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            isVegOnly = isChecked;
-            applyFilter();
-        });
     }
 
     private void loadData() {
-        long userId = sessionManager.getUserId();
-
         AppExecutor.getInstance().execute(
-                () -> {
-                    List<FoodItem> items = foodDao.getAllFoodItems();
-                    List<Category> categories = foodDao.getAllCategories();
-                    // Set favorite flags
-                    for (FoodItem item : items) {
-                        item.setFavorite(foodDao.isFavorite(userId, item.getId()));
-                    }
-                    return new Object[]{items, categories};
-                },
-                result -> {
+                () -> foodDao.getAllFoodItems(),
+                items -> {
                     allFoodItems.clear();
-                    @SuppressWarnings("unchecked")
-                    List<FoodItem> items = (List<FoodItem>) ((Object[]) result)[0];
-                    allFoodItems.addAll(items);
-
-                    allCategories.clear();
-                    @SuppressWarnings("unchecked")
-                    List<Category> categories = (List<Category>) ((Object[]) result)[1];
-                    allCategories.addAll(categories);
-
-                    populateCategoryChips();
+                    if (items != null) {
+                        allFoodItems.addAll(items);
+                    }
                     applyFilter();
                 }
         );
-    }
-
-    private void populateCategoryChips() {
-        if (!isAdded()) return;
-
-        // Keep "All" chip, add rest
-        chipGroupCategories.removeAllViews();
-
-        Chip allChip = new Chip(requireContext());
-        allChip.setText("All");
-        allChip.setCheckable(true);
-        allChip.setChecked(selectedCategoryId == -1);
-        allChip.setOnClickListener(v -> {
-            selectedCategoryId = -1;
-            applyFilter();
-        });
-        chipGroupCategories.addView(allChip);
-
-        for (Category cat : allCategories) {
-            Chip chip = new Chip(requireContext());
-            chip.setText(cat.getName());
-            chip.setCheckable(true);
-            chip.setChecked(selectedCategoryId == cat.getId());
-            chip.setOnClickListener(v -> {
-                selectedCategoryId = cat.getId();
-                applyFilter();
-            });
-            chipGroupCategories.addView(chip);
-        }
     }
 
     private void applyFilter() {
@@ -198,22 +133,11 @@ public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClic
             // Check availability (only available foods shown to customers)
             if (!item.isAvailable()) continue;
 
-            // Category filter
-            if (selectedCategoryId != -1 && item.getCategoryId() != selectedCategoryId) {
-                continue;
-            }
-
-            // Veg only filter
-            if (isVegOnly && !item.isVeg()) {
-                continue;
-            }
-
             // Search query filter
             if (!queryLower.isEmpty()) {
                 boolean matchesName = item.getName() != null && item.getName().toLowerCase().contains(queryLower);
                 boolean matchesDesc = item.getDescription() != null && item.getDescription().toLowerCase().contains(queryLower);
-                boolean matchesCat = item.getCategoryName() != null && item.getCategoryName().toLowerCase().contains(queryLower);
-                if (!matchesName && !matchesDesc && !matchesCat) {
+                if (!matchesName && !matchesDesc) {
                     continue;
                 }
             }
@@ -239,21 +163,6 @@ public class HomeFragment extends Fragment implements UserFoodAdapter.OnFoodClic
         Intent intent = new Intent(requireContext(), FoodDetailActivity.class);
         intent.putExtra(FoodDetailActivity.EXTRA_FOOD_ID, item.getId());
         startActivity(intent);
-    }
-
-    @Override
-    public void onFavoriteClick(FoodItem item, int position) {
-        long userId = sessionManager.getUserId();
-        AppExecutor.getInstance().execute(
-                () -> foodDao.toggleFavorite(userId, item.getId()),
-                fav -> {
-                    item.setFavorite(fav);
-                    adapter.notifyItemChanged(position);
-                    Toast.makeText(requireContext(),
-                            fav ? "Added to favorites ❤️" : "Removed from favorites",
-                            Toast.LENGTH_SHORT).show();
-                }
-        );
     }
 
     @Override

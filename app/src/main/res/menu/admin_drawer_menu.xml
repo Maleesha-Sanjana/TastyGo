@@ -2,17 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_admin_dashboard"
-            android:icon="@drawable/ic_dashboard"
-            android:title="Dashboard" />
-        <item
             android:id="@+id/nav_admin_menu_items"
             android:icon="@drawable/ic_restaurant_menu"
             android:title="Menu Items" />
-        <item
-            android:id="@+id/nav_admin_categories"
-            android:icon="@drawable/ic_category"
-            android:title="Categories" />
         <item
             android:id="@+id/nav_admin_orders"
             android:icon="@drawable/ic_receipt_long"

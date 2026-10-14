@@ -100,18 +100,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Forgot Password -->
-            <TextView
-                android:id="@+id/tv_forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/poppins_medium"
-                android:padding="4dp"
-                android:text="@string/forgot_password"
-                android:textColor="@color/primary_chili"
-                android:textSize="@dimen/text_caption" />
 
             <!-- Login Button -->
             <com.google.android.material.button.MaterialButton
