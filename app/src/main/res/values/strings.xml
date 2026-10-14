@@ -2,7 +2,6 @@
     <string name="app_name">TastyGo</string>
     <string name="tagline">Delicious food, delivered fast</string>
 
-    <!-- General Actions -->
     <string name="action_login">Log in</string>
     <string name="action_register">Sign up</string>
     <string name="action_logout">Log out</string>
@@ -17,7 +16,6 @@
     <string name="action_checkout">Proceed to checkout</string>
     <string name="action_track_order">Track order</string>
 
-    <!-- Auth Titles & Subtitles -->
     <string name="title_login">Welcome to TastyGo</string>
     <string name="subtitle_login">Log in to order your favorite meals</string>
     <string name="title_register">Create account</string>
@@ -26,7 +24,6 @@
     <string name="subtitle_forgot_password">Enter your registered email and phone number</string>
     <string name="subtitle_set_new_password">Enter your new password below</string>
 
-    <!-- Auth Fields & Prompts -->
     <string name="prompt_email">Email address</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_confirm_password">Confirm password</string>
@@ -42,7 +39,6 @@
     <string name="dont_have_account">Don\'t have an account? Sign up</string>
     <string name="back_to_login">Back to log in</string>
 
-    <!-- Validation & Errors -->
     <string name="error_field_required">This field is required</string>
     <string name="error_invalid_email">Please enter a valid email address</string>
     <string name="error_invalid_phone">Please enter a valid phone number (at least 7 digits)</string>
@@ -55,12 +51,10 @@
     <string name="error_empty_cart">Your cart is empty</string>
     <string name="error_coupon_invalid">Invalid or expired coupon code</string>
 
-    <!-- Success Messages -->
     <string name="msg_register_success">Account created successfully! Please log in.</string>
     <string name="msg_password_reset_success">Password updated successfully! Please log in.</string>
     <string name="msg_identity_verified">Identity verified. Please set your new password.</string>
 
-    <!-- Order Statuses -->
     <string name="status_placed">Placed</string>
     <string name="status_confirmed">Confirmed</string>
     <string name="status_preparing">Preparing</string>
@@ -68,7 +62,6 @@
     <string name="status_delivered">Delivered</string>
     <string name="status_cancelled">Cancelled</string>
 
-    <!-- Seed & Defaults -->
     <string name="default_restaurant_name">TastyGo Kitchen</string>
     <string name="default_opening_hours">09:00 AM - 10:00 PM</string>
     <string name="currency_symbol">Rs. </string>

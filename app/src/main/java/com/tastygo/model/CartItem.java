@@ -11,7 +11,6 @@ public class CartItem implements Serializable {
     private String addons;
     private String note;
 
-    // Joined fields from food_items table
     private String foodName;
     private double unitPrice;
     private String foodImagePath;

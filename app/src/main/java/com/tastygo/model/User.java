@@ -9,7 +9,7 @@ public class User implements Serializable {
     private String phone;
     private String passwordHash;
     private String salt;
-    private String role; // "USER" or "ADMIN"
+    private String role;
     private boolean isBlocked;
     private String createdAt;
 

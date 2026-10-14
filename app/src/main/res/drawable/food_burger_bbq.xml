@@ -1,27 +1,3 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
-    <path
-        android:fillColor="#FDE8E3"
-        android:pathData="M0,0h200v200h-200z" />
-    <path
-        android:fillColor="#D48B47"
-        android:pathData="M40,85 C40,50 70,35 100,35 C130,35 160,50 160,85 Z" />
-    <!-- Bacon Strips -->
-    <path
-        android:fillColor="#962A14"
-        android:pathData="M35,90 Q65,100 100,90 Q135,100 165,90 L165,102 Q135,112 100,102 Q65,112 35,102 Z" />
-    <!-- Double Patty with BBQ Sauce -->
-    <path
-        android:fillColor="#543310"
-        android:pathData="M38,106 L162,106 A8,8 0 0,1 170,114 L170,122 A8,8 0 0,1 162,130 L38,130 A8,8 0 0,1 30,122 L30,114 A8,8 0 0,1 38,106 Z" />
-    <path
-        android:fillColor="#F2542D"
-        android:pathData="M45,130 L155,130 L140,142 L100,136 L65,142 Z" />
-    <!-- Bottom Bun -->
-    <path
-        android:fillColor="#D48B47"
-        android:pathData="M42,142 L158,142 A8,8 0 0,1 166,150 L166,155 C166,168 135,172 100,172 C65,172 34,168 34,155 L34,150 A8,8 0 0,1 42,142 Z" />
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/real_food_burger" />

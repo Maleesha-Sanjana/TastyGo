@@ -51,7 +51,6 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.Orde
         holder.tvOrderDate.setText(order.getCreatedAt());
         holder.tvTotal.setText(String.format(Locale.US, "Rs. %.2f", order.getTotal()));
 
-        // Order state / status badge
         String status = order.getStatus();
         if (status == null || status.trim().isEmpty()) {
             status = Order.STATUS_PLACED;
@@ -80,7 +79,6 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.Orde
         holder.tvOrderStatus.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bgRes)));
         holder.tvOrderStatus.setTextColor(ContextCompat.getColor(context, textRes));
 
-        // Items summary: displays what was ordered
         StringBuilder sb = new StringBuilder();
         List<OrderItem> items = order.getItems();
         if (items != null && !items.isEmpty()) {

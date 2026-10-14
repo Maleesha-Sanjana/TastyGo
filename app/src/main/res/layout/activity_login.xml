@@ -19,7 +19,6 @@
             android:paddingTop="36dp"
             android:paddingBottom="36dp">
 
-            <!-- Logo -->
             <ImageView
                 android:id="@+id/iv_login_logo"
                 android:layout_width="84dp"
@@ -28,7 +27,6 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_tastygo_logo" />
 
-            <!-- Titles -->
             <TextView
                 android:id="@+id/tv_login_title"
                 android:layout_width="wrap_content"
@@ -51,7 +49,6 @@
                 android:textColor="@color/text_caption"
                 android:textSize="@dimen/text_body" />
 
-            <!-- Email Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_email"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -75,7 +72,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_password"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -100,8 +96,6 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!-- Login Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 style="@style/Widget.TastyGo.Button"
@@ -110,7 +104,6 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/action_login" />
 
-            <!-- Don't have an account? Sign up -->
             <TextView
                 android:id="@+id/tv_register_prompt"
                 android:layout_width="wrap_content"
@@ -123,7 +116,301 @@
                 android:textColor="@color/text_ink"
                 android:textSize="@dimen/text_body" />
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_welcome_offers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_line"
+                app:strokeWidth="1dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="Promo"
+                            android:src="@drawable/ic_discount"
+                            app:tint="@color/primary_chili" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="New to TastyGo? Special Offers"
+                            android:textColor="@color/text_ink"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chip_white"
+                            android:backgroundTint="@color/chili_tint"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="WELCOME PERKS"
+                            android:textColor="@color/primary_chili"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/mist"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chip_white"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="TASTY20"
+                            android:textColor="@color/primary_chili"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="Get 20% OFF your first order"
+                                android:textColor="@color/text_ink"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Valid on orders over Rs. 15.00"
+                                android:textColor="@color/text_caption"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_chip_white"
+                        android:backgroundTint="@color/mist"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chip_white"
+                            android:fontFamily="@font/poppins_bold"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="FREESHIP"
+                            android:textColor="@color/success_basil"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="Free doorstep delivery"
+                                android:textColor="@color/text_ink"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="On minimum cart total of Rs. 20.00"
+                                android:textColor="@color/text_caption"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_circle_white"
+                        android:contentDescription="Fast Delivery"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_delivery_dining"
+                        app:tint="@color/primary_chili" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Fast Delivery"
+                        android:textColor="@color/text_ink"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Hot &amp; Fresh"
+                        android:textColor="@color/text_caption"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="36dp"
+                    android:background="@color/border_line" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_circle_white"
+                        android:contentDescription="Chef Quality"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_cooking_pot"
+                        app:tint="@color/success_basil" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Chef Crafted"
+                        android:textColor="@color/text_ink"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="100% Quality"
+                        android:textColor="@color/text_caption"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="36dp"
+                    android:background="@color/border_line" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_circle_white"
+                        android:contentDescription="Safe &amp; Secure"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_lock"
+                        app:tint="@color/text_ink" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Safe &amp; Secure"
+                        android:textColor="@color/text_ink"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Encrypted Data"
+                        android:textColor="@color/text_caption"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="By continuing, you agree to TastyGo's\nTerms of Service and Privacy Policy"
+                android:textColor="@color/text_caption"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="TastyGo Food Management System • v1.0"
+                android:textColor="@color/text_caption"
+                android:textSize="10sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

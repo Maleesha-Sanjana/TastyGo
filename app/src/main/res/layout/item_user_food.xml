@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Image & Badges Container -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="140dp"
@@ -30,11 +29,8 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@drawable/food_burger_classic" />
+                android:src="@drawable/real_food_burger" />
 
-
-
-            <!-- Veg / Non-Veg Indicator Bottom-Start -->
             <ImageView
                 android:id="@+id/iv_food_veg_badge"
                 android:layout_width="18dp"
@@ -43,9 +39,24 @@
                 android:layout_margin="8dp"
                 android:contentDescription="Veg or Non-Veg"
                 android:src="@drawable/ic_veg" />
+
+            <TextView
+                android:id="@+id/tv_food_popular_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_chip_white"
+                android:backgroundTint="@color/primary_chili"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="🔥 Fast Moving"
+                android:textColor="@color/white"
+                android:textSize="9sp"
+                android:visibility="gone" />
         </FrameLayout>
 
-        <!-- Content Area -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +96,6 @@
                 android:textColor="@color/text_caption"
                 android:textSize="12sp" />
 
-            <!-- Price and Add Button Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -17,7 +17,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Top Header: Order #, Order Type, Status -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +65,6 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Customer & Time Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,7 +92,6 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Customer Phone & Address -->
         <LinearLayout
             android:id="@+id/layout_admin_customer_phone"
             android:layout_width="wrap_content"
@@ -148,7 +145,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Items Summary -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -166,7 +162,6 @@
             android:textColor="@color/text_ink"
             android:textSize="12sp" />
 
-        <!-- Note layout (hidden if empty) -->
         <LinearLayout
             android:id="@+id/layout_admin_order_note"
             android:layout_width="match_parent"
@@ -189,7 +184,6 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Bottom Actions Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -222,7 +216,6 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Update Status Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_admin_update_status"
                 style="@style/Widget.MaterialComponents.Button"

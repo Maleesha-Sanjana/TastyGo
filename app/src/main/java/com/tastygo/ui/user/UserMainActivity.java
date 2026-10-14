@@ -37,7 +37,6 @@ public class UserMainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.user_bottom_nav);
         setupBottomNav();
 
-        // Default to HomeFragment
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }

@@ -1,29 +1,3 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
-    <path
-        android:fillColor="#FFF5D9"
-        android:pathData="M0,0h200v200h-200z" />
-    <!-- Glass Cup -->
-    <path
-        android:fillColor="#FFB703"
-        android:pathData="M65,70 L75,160 A10,10 0 0,0 85,170 L115,170 A10,10 0 0,0 125,160 L135,70 Z" />
-    <!-- Passionfruit Swirl / Foam Top -->
-    <path
-        android:fillColor="#FB8500"
-        android:pathData="M60,65 Q80,50 100,65 Q120,50 140,65 L135,80 L65,80 Z" />
-    <!-- Straw -->
-    <path
-        android:strokeColor="#2E9E6B"
-        android:strokeWidth="7"
-        android:strokeLineCap="round"
-        android:pathData="M100,75 L115,25" />
-    <!-- Mint Garnish -->
-    <path android:fillColor="#2E9E6B" android:pathData="M80,55 Q90,45 100,55 Q90,65 80,55 Z" />
-    <!-- Boba Pearls -->
-    <path android:fillColor="#231F2E" android:pathData="M85,150 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
-    <path android:fillColor="#231F2E" android:pathData="M105,152 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
-    <path android:fillColor="#231F2E" android:pathData="M95,138 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/real_food_smoothie" />

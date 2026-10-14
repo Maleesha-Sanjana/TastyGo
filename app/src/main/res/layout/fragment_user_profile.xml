@@ -6,7 +6,6 @@
     android:background="@color/bg_mist"
     android:orientation="vertical">
 
-    <!-- Top Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +36,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Profile Summary Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +114,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Delivery Address Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -185,7 +182,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Log Out Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_profile_logout"
                 style="@style/Widget.TastyGo.Button.Outlined"

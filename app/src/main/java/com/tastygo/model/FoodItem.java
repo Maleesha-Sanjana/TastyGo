@@ -15,8 +15,8 @@ public class FoodItem implements Serializable {
     private boolean isVeg;
     private double avgRating;
     private int stock = 20;
+    private boolean isPopular = false;
 
-    // Joined / transient fields
     private String categoryName;
     private boolean isFavorite;
     private List<FoodOption> options = new ArrayList<>();
@@ -158,5 +158,21 @@ public class FoodItem implements Serializable {
 
     public boolean isInStock() {
         return isAvailable && stock > 0;
+    }
+
+    public boolean isPopular() {
+        return isPopular;
+    }
+
+    public void setPopular(boolean popular) {
+        this.isPopular = popular;
+    }
+
+    public boolean isFastMoving() {
+        return isPopular;
+    }
+
+    public void setFastMoving(boolean fastMoving) {
+        this.isPopular = fastMoving;
     }
 }

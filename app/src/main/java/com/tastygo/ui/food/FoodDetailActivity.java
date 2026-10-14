@@ -45,7 +45,6 @@ public class FoodDetailActivity extends AppCompatActivity {
     private TextView tvBasePrice;
     private TextView tvDescription;
 
-    // Options Sections
     private MaterialCardView cardSectionSize;
     private RadioGroup rgSizes;
     private MaterialCardView cardSectionCheese;
@@ -54,7 +53,6 @@ public class FoodDetailActivity extends AppCompatActivity {
     private LinearLayout layoutAddonOptions;
     private EditText etNote;
 
-    // Stepper & Add Button
     private ImageButton btnMinus;
     private ImageButton btnPlus;
     private TextView tvQty;
@@ -68,7 +66,6 @@ public class FoodDetailActivity extends AppCompatActivity {
     private FoodItem foodItem;
     private int quantity = 1;
 
-    // Selections
     private FoodOption selectedSize = null;
     private final List<FoodOption> selectedCheeses = new ArrayList<>();
     private final List<FoodOption> selectedAddons = new ArrayList<>();
@@ -173,7 +170,6 @@ public class FoodDetailActivity extends AppCompatActivity {
             ivVegBadge.setImageResource(R.drawable.ic_non_veg);
         }
 
-        // Stock status
         int stock = foodItem.getStock();
         boolean inStock = foodItem.isInStock();
 
@@ -207,7 +203,6 @@ public class FoodDetailActivity extends AppCompatActivity {
     private void bindOptions() {
         List<FoodOption> options = foodItem.getOptions();
 
-        // If no options configured in DB, provide contextual defaults
         if (options == null || options.isEmpty()) {
             options = getDefaultOptionsForFood(foodItem);
         }
@@ -226,19 +221,16 @@ public class FoodDetailActivity extends AppCompatActivity {
             }
         }
 
-        // Always ensure at least 2 cheese choices if cheese options were empty
         if (cheeseOptions.isEmpty()) {
             cheeseOptions.add(new FoodOption(foodId, "ADDON", "Extra Cheddar Cheese", 0.99));
             cheeseOptions.add(new FoodOption(foodId, "ADDON", "Melted Mozzarella", 1.25));
         }
 
-        // Always ensure delicious add-ons if addon options were empty
         if (addonOptions.isEmpty()) {
             addonOptions.add(new FoodOption(foodId, "ADDON", "Crispy Bacon Strips", 1.49));
             addonOptions.add(new FoodOption(foodId, "ADDON", "Caramelized Onions", 0.75));
         }
 
-        // 1. Setup Sizes
         if (!sizeOptions.isEmpty()) {
             cardSectionSize.setVisibility(View.VISIBLE);
             rgSizes.removeAllViews();
@@ -276,7 +268,6 @@ public class FoodDetailActivity extends AppCompatActivity {
             selectedSize = null;
         }
 
-        // 2. Setup Extra Cheese Section
         cardSectionCheese.setVisibility(View.VISIBLE);
         layoutCheeseOptions.removeAllViews();
         selectedCheeses.clear();
@@ -305,7 +296,6 @@ public class FoodDetailActivity extends AppCompatActivity {
             layoutCheeseOptions.addView(itemView);
         }
 
-        // 3. Setup Add-ons & Extras Section
         cardSectionAddons.setVisibility(View.VISIBLE);
         layoutAddonOptions.removeAllViews();
         selectedAddons.clear();
@@ -383,7 +373,6 @@ public class FoodDetailActivity extends AppCompatActivity {
         long userId = sessionManager.getUserId();
         String sizeName = selectedSize != null ? selectedSize.getName() : "";
 
-        // Combine selected cheese and addon labels
         List<String> combinedAddons = new ArrayList<>();
         for (FoodOption fo : selectedCheeses) {
             combinedAddons.add(fo.getName());

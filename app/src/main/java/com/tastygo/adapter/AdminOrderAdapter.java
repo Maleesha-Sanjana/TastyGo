@@ -60,7 +60,6 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
         holder.tvOrderId.setText(String.format(Locale.US, "#TGO-%04d", order.getId()));
         holder.tvOrderType.setText(order.getOrderType().toUpperCase(Locale.US));
 
-        // Customer details
         String customerName = order.getUserName();
         holder.tvCustomerName.setText(customerName != null && !customerName.isEmpty() ? customerName : "Guest User");
         holder.tvOrderTime.setText(order.getCreatedAt());
@@ -89,7 +88,6 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
             }
         }
 
-        // Status badge colors
         String status = order.getStatus();
         holder.tvStatus.setText(status.replace("_", " "));
 
@@ -115,7 +113,6 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
         holder.tvStatus.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, bgRes)));
         holder.tvStatus.setTextColor(ContextCompat.getColor(context, textRes));
 
-        // Items summary
         StringBuilder sb = new StringBuilder();
         List<OrderItem> items = order.getItems();
         if (items != null && !items.isEmpty()) {
@@ -130,7 +127,6 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
         }
         holder.tvItemsSummary.setText(sb.toString());
 
-        // Note
         String note = order.getNote();
         if (note != null && !note.trim().isEmpty()) {
             holder.tvOrderNote.setText("Note: " + note);
@@ -139,11 +135,9 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ad
             holder.layoutNote.setVisibility(View.GONE);
         }
 
-        // Price & Payment
         holder.tvTotal.setText(String.format(Locale.US, "Rs. %.2f", order.getTotal()));
         holder.tvPaymentMethod.setText("Payment: " + order.getPaymentMethod());
 
-        // Buttons
         holder.btnUpdateStatus.setOnClickListener(v -> {
             if (listener != null) listener.onUpdateStatus(order);
         });

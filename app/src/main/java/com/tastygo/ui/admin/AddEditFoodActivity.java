@@ -97,6 +97,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
                 binding.etFoodStock.setText(String.valueOf(food.getStock()));
                 binding.etFoodDesc.setText(food.getDescription());
                 binding.switchFoodAvailable.setChecked(food.isAvailable());
+                binding.switchFoodPopular.setChecked(food.isPopular());
 
                 currentImagePath = food.getImagePath();
                 if (currentImagePath != null && !currentImagePath.isEmpty()) {
@@ -106,6 +107,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
             } else {
                 selectedCategoryId = defaultCat;
                 binding.etFoodStock.setText("20");
+                binding.switchFoodPopular.setChecked(false);
             }
         });
     }
@@ -116,6 +118,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
         String stockStr = binding.etFoodStock.getText() != null ? binding.etFoodStock.getText().toString().trim() : "";
         String desc = binding.etFoodDesc.getText() != null ? binding.etFoodDesc.getText().toString().trim() : "";
         boolean isAvailable = binding.switchFoodAvailable.isChecked();
+        boolean isPopular = binding.switchFoodPopular.isChecked();
 
         binding.tilFoodName.setError(null);
         binding.tilFoodPrice.setError(null);
@@ -168,7 +171,7 @@ public class AddEditFoodActivity extends AppCompatActivity {
 
         final double finalPrice = price;
         final int finalStock = stock;
-        final String finalImagePath = currentImagePath.isEmpty() ? "ic_food_placeholder" : currentImagePath;
+        final String finalImagePath = currentImagePath.isEmpty() ? ImageUtil.mapToRealPhoto(name) : currentImagePath;
 
         AppExecutor.getInstance().execute(() -> {
             boolean success;
@@ -177,17 +180,16 @@ public class AddEditFoodActivity extends AppCompatActivity {
             long catId = selectedCategoryId > 0 ? selectedCategoryId : 1L;
 
             if (foodId > 0) {
-                // Update
                 FoodItem item = new FoodItem(foodId, catId, name, desc, finalPrice, finalImagePath, isAvailable && (finalStock > 0), false, 0.0, finalStock);
+                item.setPopular(isPopular);
                 success = foodDao.updateFood(item);
             } else {
-                // Insert
                 FoodItem item = new FoodItem(catId, name, desc, finalPrice, finalImagePath, isAvailable && (finalStock > 0), false, 5.0, finalStock);
+                item.setPopular(isPopular);
                 targetFoodId = foodDao.insertFood(item);
                 success = targetFoodId > 0;
 
                 if (success) {
-                    // Seed standard extra cheese and addon options for new food item
                     foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "SIZE", "Regular Portion", 0.0));
                     foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "SIZE", "Large Portion", 2.00));
                     foodDao.insertOption(new com.tastygo.model.FoodOption(targetFoodId, "ADDON", "Extra Cheddar Cheese", 0.99));

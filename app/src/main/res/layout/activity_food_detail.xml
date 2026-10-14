@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Hero Image Header with Floating Buttons -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
@@ -29,9 +28,8 @@
                     android:layout_height="match_parent"
                     android:contentDescription="Food Hero Image"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/food_burger_classic" />
+                    android:src="@drawable/real_food_burger" />
 
-                <!-- Back Button -->
                 <ImageButton
                     android:id="@+id/btn_detail_back"
                     android:layout_width="40dp"
@@ -46,7 +44,6 @@
 
             </FrameLayout>
 
-            <!-- Food Info Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +51,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <!-- Tags Row: Category, Veg Badge, Rating -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,7 +83,6 @@
                         android:layout_height="1dp"
                         android:layout_weight="1" />
 
-                    <!-- Stock Status Badge -->
                     <TextView
                         android:id="@+id/tv_detail_stock"
                         android:layout_width="wrap_content"
@@ -103,7 +98,6 @@
 
                 </LinearLayout>
 
-                <!-- Title & Price -->
                 <TextView
                     android:id="@+id/tv_detail_title"
                     android:layout_width="match_parent"
@@ -136,7 +130,6 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Portion / Size Section -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_section_size"
                 android:layout_width="match_parent"
@@ -179,7 +172,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Extra Cheese Section -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_section_cheese"
                 android:layout_width="match_parent"
@@ -234,7 +226,6 @@
                         android:textColor="@color/text_caption"
                         android:textSize="12sp" />
 
-                    <!-- Container for dynamic cheese options -->
                     <LinearLayout
                         android:id="@+id/layout_cheese_options"
                         android:layout_width="match_parent"
@@ -245,7 +236,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Add-ons & Extras Section -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_section_addons"
                 android:layout_width="match_parent"
@@ -300,7 +290,6 @@
                         android:textColor="@color/text_caption"
                         android:textSize="12sp" />
 
-                    <!-- Container for dynamic addon options -->
                     <LinearLayout
                         android:id="@+id/layout_addon_options"
                         android:layout_width="match_parent"
@@ -311,7 +300,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Special Instructions Note -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -363,7 +351,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Sticky Bottom Bar -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -382,7 +369,6 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp">
 
-            <!-- Stepper Container -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
@@ -421,7 +407,6 @@
                     app:tint="@color/text_ink" />
             </LinearLayout>
 
-            <!-- Add to Cart Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_detail_add_to_cart"
                 style="@style/Widget.TastyGo.Button"

@@ -17,19 +17,18 @@ public class Order implements Serializable {
 
     private long id;
     private long userId;
-    private Long addressId; // nullable for pickup
+    private Long addressId;
     private double subtotal;
     private double discount;
     private double deliveryFee;
     private double tax;
     private double total;
-    private String paymentMethod; // "CASH", "CARD", "WALLET"
-    private String orderType;     // "DELIVERY" or "PICKUP"
-    private String status;        // PLACED, CONFIRMED, PREPARING, OUT_FOR_DELIVERY, DELIVERED, CANCELLED
+    private String paymentMethod;
+    private String orderType;
+    private String status;
     private String note;
     private String createdAt;
 
-    // Joined / transient fields
     private String userName;
     private String userPhone;
     private String addressText;

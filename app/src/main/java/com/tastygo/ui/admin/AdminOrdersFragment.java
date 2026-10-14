@@ -223,7 +223,6 @@ public class AdminOrdersFragment extends Fragment implements AdminOrderAdapter.O
         tvTitle.setText(String.format(Locale.US, "Order #TGO-%04d", order.getId()));
         tvSub.setText("Current status: " + order.getStatus().replace("_", " "));
 
-        // Pre-select current status
         String status = order.getStatus();
         if (Order.STATUS_PLACED.equalsIgnoreCase(status)) {
             rbPlaced.setChecked(true);

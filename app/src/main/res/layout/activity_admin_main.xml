@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- Main Content Area -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +30,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Fragment Container -->
         <FrameLayout
             android:id="@+id/admin_fragment_container"
             android:layout_width="match_parent"
@@ -40,7 +38,6 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/admin_nav_view"
         android:layout_width="280dp"

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Address implements Serializable {
     private long id;
     private long userId;
-    private String label; // "Home", "Work", "Other"
+    private String label;
     private String addressText;
     private boolean isDefault;
 

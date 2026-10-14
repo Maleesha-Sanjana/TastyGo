@@ -8,16 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.tastygo.util.DateUtil;
 import com.tastygo.util.PasswordUtil;
 
-/**
- * TastyGo SQLiteOpenHelper manages the standalone offline SQLite database.
- * Handles table creation, migrations, and first-launch seed data.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "tastygo.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
 
-    // Table names
     public static final String TABLE_USERS = "users";
     public static final String TABLE_CATEGORIES = "categories";
     public static final String TABLE_FOOD_ITEMS = "food_items";
@@ -47,13 +42,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
-        // Enable foreign key constraints
         db.setForeignKeyConstraintsEnabled(true);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // 1. users table
         db.execSQL("CREATE TABLE " + TABLE_USERS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL, " +
@@ -66,14 +59,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "created_at TEXT NOT NULL" +
                 ");");
 
-        // 2. categories table
         db.execSQL("CREATE TABLE " + TABLE_CATEGORIES + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL, " +
                 "image_path TEXT" +
                 ");");
 
-        // 3. food_items table (includes stock)
         db.execSQL("CREATE TABLE " + TABLE_FOOD_ITEMS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "category_id INTEGER, " +
@@ -85,10 +76,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "is_veg INTEGER DEFAULT 1, " +
                 "avg_rating REAL DEFAULT 0.0, " +
                 "stock INTEGER DEFAULT 20, " +
+                "is_popular INTEGER DEFAULT 0, " +
                 "FOREIGN KEY(category_id) REFERENCES " + TABLE_CATEGORIES + "(id) ON DELETE SET NULL" +
                 ");");
 
-        // 4. food_options table
         db.execSQL("CREATE TABLE " + TABLE_FOOD_OPTIONS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "food_id INTEGER NOT NULL, " +
@@ -98,7 +89,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(food_id) REFERENCES " + TABLE_FOOD_ITEMS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 5. cart_items table (includes unit_price snapshot)
         db.execSQL("CREATE TABLE " + TABLE_CART_ITEMS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
@@ -112,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(food_id) REFERENCES " + TABLE_FOOD_ITEMS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 6. addresses table
         db.execSQL("CREATE TABLE " + TABLE_ADDRESSES + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
@@ -122,7 +111,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(user_id) REFERENCES " + TABLE_USERS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 7. orders table
         db.execSQL("CREATE TABLE " + TABLE_ORDERS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
@@ -141,7 +129,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(address_id) REFERENCES " + TABLE_ADDRESSES + "(id) ON DELETE SET NULL" +
                 ");");
 
-        // 8. order_items table
         db.execSQL("CREATE TABLE " + TABLE_ORDER_ITEMS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "order_id INTEGER NOT NULL, " +
@@ -152,7 +139,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(order_id) REFERENCES " + TABLE_ORDERS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 9. coupons table
         db.execSQL("CREATE TABLE " + TABLE_COUPONS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "code TEXT UNIQUE NOT NULL, " +
@@ -163,7 +149,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "is_active INTEGER DEFAULT 1" +
                 ");");
 
-        // 10. reviews table
         db.execSQL("CREATE TABLE " + TABLE_REVIEWS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
@@ -175,7 +160,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(food_id) REFERENCES " + TABLE_FOOD_ITEMS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 11. favorites table
         db.execSQL("CREATE TABLE " + TABLE_FAVORITES + " (" +
                 "user_id INTEGER NOT NULL, " +
                 "food_id INTEGER NOT NULL, " +
@@ -184,13 +168,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(food_id) REFERENCES " + TABLE_FOOD_ITEMS + "(id) ON DELETE CASCADE" +
                 ");");
 
-        // 12. settings table
         db.execSQL("CREATE TABLE " + TABLE_SETTINGS + " (" +
                 "key TEXT PRIMARY KEY, " +
                 "value TEXT" +
                 ");");
 
-        // Seed initial data on first creation
         seedInitialData(db);
     }
 
@@ -204,17 +186,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL("ALTER TABLE " + TABLE_CART_ITEMS + " ADD COLUMN unit_price REAL");
             } catch (Exception ignored) {}
         }
+        if (oldVersion < 3) {
+            try {
+                db.execSQL("ALTER TABLE " + TABLE_FOOD_ITEMS + " ADD COLUMN is_popular INTEGER DEFAULT 0");
+            } catch (Exception ignored) {}
+        }
+        if (oldVersion < 4) {
+            applyRealPhotosAndPopularFlags(db);
+        }
     }
 
-    /**
-     * Seeds initial database records inside a single transaction.
-     */
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        applyRealPhotosAndPopularFlags(db);
+    }
+
+    private void applyRealPhotosAndPopularFlags(SQLiteDatabase db) {
+        try {
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_burger' WHERE image_path LIKE '%burger%' OR image_path LIKE '%beef%' OR image_path LIKE '%veggie%' OR image_path = 'ic_food_placeholder' OR image_path IS NULL OR image_path = ''");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_pizza' WHERE image_path LIKE '%pizza%' OR image_path LIKE '%truffle%' OR image_path LIKE '%margherita%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_ramen' WHERE image_path LIKE '%ramen%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_padthai' WHERE image_path LIKE '%padthai%' OR image_path LIKE '%sichuan%' OR image_path LIKE '%asian%' OR image_path LIKE '%noodle%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_smoothie' WHERE image_path LIKE '%smoothie%' OR image_path LIKE '%mango%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_dessert' WHERE image_path LIKE '%cake%' OR image_path LIKE '%dessert%' OR image_path LIKE '%chocolate%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET image_path = 'real_food_latte' WHERE image_path LIKE '%latte%' OR image_path LIKE '%coffee%' OR image_path LIKE '%drink%'");
+            db.execSQL("UPDATE " + TABLE_FOOD_ITEMS + " SET is_popular = 1 WHERE name IN ('Classic Cheeseburger', 'Smoky BBQ Bacon Burger', 'Margherita Supreme', 'Pepperoni Feast', 'Iced Salted Caramel Latte')");
+        } catch (Exception ignored) {}
+    }
+
     private void seedInitialData(SQLiteDatabase db) {
         db.beginTransaction();
         try {
             String now = DateUtil.now();
 
-            // 1. Seed Admin user (admin@tastygo.com / Admin@123)
             String adminSalt = PasswordUtil.generateSalt();
             String adminHash = PasswordUtil.hashPassword("Admin@123", adminSalt);
             ContentValues adminCv = new ContentValues();
@@ -228,7 +233,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             adminCv.put("created_at", now);
             db.insert(TABLE_USERS, null, adminCv);
 
-            // 1b. Seed Sample User (user@tastygo.com / User@123) for easy testing
             String userSalt = PasswordUtil.generateSalt();
             String userHash = PasswordUtil.hashPassword("User@123", userSalt);
             ContentValues userCv = new ContentValues();
@@ -242,7 +246,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             userCv.put("created_at", now);
             long sampleUserId = db.insert(TABLE_USERS, null, userCv);
 
-            // Seed default address for sample user
             ContentValues addrCv = new ContentValues();
             addrCv.put("user_id", sampleUserId);
             addrCv.put("label", "Home");
@@ -250,17 +253,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             addrCv.put("is_default", 1);
             db.insert(TABLE_ADDRESSES, null, addrCv);
 
-            // 2. Seed 4 Categories
             long catBurgers = insertCategory(db, "Burgers", "ic_cat_burger");
             long catPizza = insertCategory(db, "Pizza", "ic_cat_pizza");
             long catAsian = insertCategory(db, "Asian & Noodles", "ic_cat_asian");
             long catDrinks = insertCategory(db, "Drinks & Desserts", "ic_cat_drink");
 
-            // 3. Seed 12 Food Items (3 per category) with options and stock
-            // Burgers
             long f1 = insertFood(db, catBurgers, "Classic Cheeseburger",
                     "Juicy beef patty grilled to perfection with melted cheddar, crisp lettuce, pickles, and chef's signature sauce.",
-                    8.99, "food_burger_classic", 1, 0, 4.8, 25);
+                    8.99, "real_food_burger", 1, 0, 4.8, 25, 1);
             insertOption(db, f1, "SIZE", "Regular Patty", 0.0);
             insertOption(db, f1, "SIZE", "Double Patty", 2.50);
             insertOption(db, f1, "ADDON", "Extra Cheddar Cheese", 0.99);
@@ -269,7 +269,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f2 = insertFood(db, catBurgers, "Crispy Veggie Burger",
                     "House-made golden quinoa and garden vegetable patty, smashed avocado, fresh tomato, and herb aioli.",
-                    7.49, "food_burger_veggie", 1, 1, 4.6, 20);
+                    7.49, "real_food_burger", 1, 1, 4.6, 20);
             insertOption(db, f2, "SIZE", "Single", 0.0);
             insertOption(db, f2, "SIZE", "Double", 2.00);
             insertOption(db, f2, "ADDON", "Extra Cheese Slice", 0.99);
@@ -278,17 +278,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f3 = insertFood(db, catBurgers, "Smoky BBQ Bacon Burger",
                     "Flame-grilled prime Angus beef loaded with applewood smoked bacon, caramelized onions, and smoky BBQ glaze.",
-                    9.99, "food_burger_bbq", 1, 0, 4.9, 18);
+                    9.99, "real_food_burger", 1, 0, 4.9, 18, 1);
             insertOption(db, f3, "SIZE", "Regular", 0.0);
             insertOption(db, f3, "SIZE", "Large (6oz)", 2.99);
             insertOption(db, f3, "ADDON", "Double Cheddar Cheese", 1.49);
             insertOption(db, f3, "ADDON", "Extra Smoky BBQ Sauce", 0.50);
             insertOption(db, f3, "ADDON", "Crispy Onion Rings", 1.50);
 
-            // Pizza
             long f4 = insertFood(db, catPizza, "Margherita Supreme",
                     "Stone-baked crust topped with San Marzano tomato sauce, fresh buffalo mozzarella, aromatic sweet basil, and extra virgin olive oil.",
-                    12.99, "food_pizza_margherita", 1, 1, 4.7, 30);
+                    12.99, "real_food_pizza", 1, 1, 4.7, 30, 1);
             insertOption(db, f4, "SIZE", "10 inch Medium", 0.0);
             insertOption(db, f4, "SIZE", "14 inch Large", 4.00);
             insertOption(db, f4, "ADDON", "Stuffed Cheese Crust", 2.50);
@@ -296,7 +295,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f5 = insertFood(db, catPizza, "Pepperoni Feast",
                     "Loaded with artisanal beef and pork pepperoni, mozzarella, and crushed red pepper flakes on a crispy sourdough crust.",
-                    14.99, "food_pizza_pepperoni", 1, 0, 4.9, 22);
+                    14.99, "real_food_pizza", 1, 0, 4.9, 22, 1);
             insertOption(db, f5, "SIZE", "10 inch Medium", 0.0);
             insertOption(db, f5, "SIZE", "14 inch Large", 4.50);
             insertOption(db, f5, "ADDON", "Extra Mozzarella Melt", 1.50);
@@ -306,16 +305,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f6 = insertFood(db, catPizza, "Truffle Wild Mushroom Pizza",
                     "White cream base with roasted cremini & shiitake mushrooms, thyme, shaved parmesan, and fragrant black truffle oil.",
-                    15.49, "food_pizza_truffle", 1, 1, 4.8, 15);
+                    15.49, "real_food_pizza", 1, 1, 4.8, 15);
             insertOption(db, f6, "SIZE", "10 inch Medium", 0.0);
             insertOption(db, f6, "SIZE", "14 inch Large", 4.50);
             insertOption(db, f6, "ADDON", "Shaved Parmesan Cheese", 1.25);
             insertOption(db, f6, "ADDON", "Extra Truffle Drizzle", 1.75);
 
-            // Asian & Noodles
             long f7 = insertFood(db, catAsian, "Tonkotsu Chicken Ramen",
                     "Rich 12-hour simmered broth, springy handcrafted noodles, tender chicken chashu, ajitsuke tamago egg, and scallions.",
-                    11.99, "food_asian_ramen", 1, 0, 4.9, 25);
+                    11.99, "real_food_ramen", 1, 0, 4.9, 25);
             insertOption(db, f7, "SIZE", "Standard Bowl", 0.0);
             insertOption(db, f7, "SIZE", "Jumbo Bowl", 2.50);
             insertOption(db, f7, "ADDON", "Melted Gouda Cheese", 1.25);
@@ -324,7 +322,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f8 = insertFood(db, catAsian, "Pad Thai Tofu & Peanuts",
                     "Classic stir-fried rice noodles with tamarind sauce, golden crispy tofu, bean sprouts, chives, and toasted crushed peanuts.",
-                    10.49, "food_asian_padthai", 1, 1, 4.6, 20);
+                    10.49, "real_food_padthai", 1, 1, 4.6, 20);
             insertOption(db, f8, "SIZE", "Regular Portion", 0.0);
             insertOption(db, f8, "SIZE", "Family Share", 3.50);
             insertOption(db, f8, "ADDON", "Extra Crushed Peanuts", 0.75);
@@ -332,16 +330,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f9 = insertFood(db, catAsian, "Sichuan Chili Beef Noodles",
                     "Hand-pulled noodles tossed with slow-braised beef brisket, fragrant Sichuan chili oil, bok choy, and roasted sesame.",
-                    12.99, "food_asian_sichuan", 1, 0, 4.7, 18);
+                    12.99, "real_food_padthai", 1, 0, 4.7, 18);
             insertOption(db, f9, "SIZE", "Medium Spicy", 0.0);
             insertOption(db, f9, "SIZE", "Fire Spicy", 0.0);
             insertOption(db, f9, "ADDON", "Extra Braised Beef", 3.00);
             insertOption(db, f9, "ADDON", "Crispy Garlic Chili Crunch", 0.99);
 
-            // Drinks & Desserts
             long f10 = insertFood(db, catDrinks, "Mango Passion Smoothie",
                     "Blended tropical Alphonso mango, tart passionfruit puree, organic yogurt, and crushed ice.",
-                    4.99, "food_drink_mango", 1, 1, 4.8, 40);
+                    4.99, "real_food_smoothie", 1, 1, 4.8, 40);
             insertOption(db, f10, "SIZE", "Regular (16oz)", 0.0);
             insertOption(db, f10, "SIZE", "Large (24oz)", 1.25);
             insertOption(db, f10, "ADDON", "Chia Seeds", 0.75);
@@ -349,24 +346,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             long f11 = insertFood(db, catDrinks, "Molten Chocolate Lava Cake",
                     "Warm Belgian dark chocolate cake with a luscious gooey molten core, dusted with powdered cocoa.",
-                    5.99, "food_dessert_cake", 1, 1, 4.9, 30);
+                    5.99, "real_food_dessert", 1, 1, 4.9, 30);
             insertOption(db, f11, "SIZE", "Individual Serving", 0.0);
             insertOption(db, f11, "ADDON", "Madagascar Vanilla Gelato", 1.99);
             insertOption(db, f11, "ADDON", "Warm Raspberry Coulis", 0.99);
 
             long f12 = insertFood(db, catDrinks, "Iced Salted Caramel Latte",
                     "Double shot of espresso over cold fresh milk, house caramel drizzle, and a pinch of pink Himalayan sea salt.",
-                    4.49, "food_drink_latte", 1, 1, 4.7, 35);
+                    4.49, "real_food_latte", 1, 1, 4.7, 35, 1);
             insertOption(db, f12, "SIZE", "Medium (16oz)", 0.0);
             insertOption(db, f12, "SIZE", "Large (24oz)", 1.00);
             insertOption(db, f12, "ADDON", "Oat Milk Substitute", 0.75);
             insertOption(db, f12, "ADDON", "Extra Espresso Shot", 1.00);
 
-            // 4. Seed 2 Coupons (TASTY20 and FREESHIP)
             insertCoupon(db, "TASTY20", "PERCENT", 20.0, 15.00, "2028-12-31", 1);
             insertCoupon(db, "FREESHIP", "FLAT", 3.99, 20.00, "2028-12-31", 1);
 
-            // 5. Seed Default Settings
             insertSetting(db, "restaurant_name", "TastyGo Kitchen");
             insertSetting(db, "opening_hours", "09:00 AM - 10:00 PM");
             insertSetting(db, "delivery_fee", "3.99");
@@ -388,6 +383,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private long insertFood(SQLiteDatabase db, long catId, String name, String desc,
                             double price, String imagePath, int isAvail, int isVeg, double rating, int stock) {
+        return insertFood(db, catId, name, desc, price, imagePath, isAvail, isVeg, rating, stock, 0);
+    }
+
+    private long insertFood(SQLiteDatabase db, long catId, String name, String desc,
+                            double price, String imagePath, int isAvail, int isVeg, double rating, int stock, int isPopular) {
         ContentValues cv = new ContentValues();
         cv.put("category_id", catId);
         cv.put("name", name);
@@ -398,12 +398,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("is_veg", isVeg);
         cv.put("avg_rating", rating);
         cv.put("stock", stock);
+        cv.put("is_popular", isPopular);
         return db.insert(TABLE_FOOD_ITEMS, null, cv);
     }
 
     private long insertFood(SQLiteDatabase db, long catId, String name, String desc,
                             double price, String imagePath, int isAvail, int isVeg, double rating) {
-        return insertFood(db, catId, name, desc, price, imagePath, isAvail, isVeg, rating, 25);
+        return insertFood(db, catId, name, desc, price, imagePath, isAvail, isVeg, rating, 25, 0);
     }
 
     private void insertOption(SQLiteDatabase db, long foodId, String type, String name, double extraPrice) {

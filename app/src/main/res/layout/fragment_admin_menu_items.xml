@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Search Bar Card (24dp corner radius) -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -62,7 +61,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Total Items Counter Label -->
         <TextView
             android:id="@+id/tv_admin_items_count"
             android:layout_width="wrap_content"
@@ -75,7 +73,6 @@
             android:textColor="@color/text_caption"
             android:textSize="@dimen/text_caption" />
 
-        <!-- Food List -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_admin_foods"
             android:layout_width="match_parent"
@@ -84,7 +81,6 @@
             android:clipToPadding="false"
             android:paddingBottom="88dp" />
 
-        <!-- Empty State -->
         <LinearLayout
             android:id="@+id/layout_empty_foods"
             android:layout_width="match_parent"
@@ -123,7 +119,6 @@
 
     </LinearLayout>
 
-    <!-- FAB Add Food Item -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_food"
         android:layout_width="wrap_content"

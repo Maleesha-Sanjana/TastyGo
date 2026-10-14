@@ -28,9 +28,6 @@ public class SessionManager {
         this.editor = pref.edit();
     }
 
-    /**
-     * Saves user login session details.
-     */
     public void createLoginSession(long userId, String name, String email, String phone, String role) {
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.putLong(KEY_USER_ID, userId);
@@ -97,9 +94,6 @@ public class SessionManager {
         editor.apply();
     }
 
-    /**
-     * Clears user session on logout while keeping general app preferences.
-     */
     public void logout() {
         boolean dark = isDarkMode();
         boolean notif = areNotificationsEnabled();

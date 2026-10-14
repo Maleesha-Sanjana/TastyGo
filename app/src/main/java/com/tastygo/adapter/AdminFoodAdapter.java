@@ -44,6 +44,7 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
                     oldItem.getPrice() == newItem.getPrice() &&
                     oldItem.getStock() == newItem.getStock() &&
                     oldItem.isAvailable() == newItem.isAvailable() &&
+                    oldItem.isPopular() == newItem.isPopular() &&
                     oldItem.isVeg() == newItem.isVeg() &&
                     oldItem.getAvgRating() == newItem.getAvgRating() &&
                     oldItem.getImagePath().equals(newItem.getImagePath());
@@ -78,7 +79,8 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
             binding.tvAdminFoodName.setText(item.getName());
             binding.tvAdminFoodPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getPrice()));
 
-            // Stock Count Badge
+            binding.tvAdminFoodPopular.setVisibility(item.isPopular() ? android.view.View.VISIBLE : android.view.View.GONE);
+
             int stock = item.getStock();
             if (stock <= 0) {
                 binding.tvAdminFoodStock.setText("Out of Stock (0)");
@@ -94,10 +96,8 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
                 binding.tvAdminFoodStock.setBackgroundTintList(android.content.res.ColorStateList.valueOf(context.getColor(R.color.status_delivered_bg)));
             }
 
-            // Load Food Thumbnail
             ImageUtil.loadImage(context, item.getImagePath(), binding.ivAdminFoodThumb, R.drawable.ic_food_placeholder);
 
-            // Availability Switch
             binding.switchAvailability.setOnCheckedChangeListener(null);
             binding.switchAvailability.setChecked(item.isAvailable() && stock > 0);
             binding.tvAvailabilityLabel.setText(item.isAvailable() && stock > 0 ? "Active" : "Inactive");
@@ -110,7 +110,6 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
                 }
             });
 
-            // Action Buttons
             binding.btnAdminEditFood.setOnClickListener(v -> {
                 if (listener != null) listener.onEdit(item);
             });

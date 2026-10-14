@@ -10,9 +10,6 @@ import com.tastygo.model.CartItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Data Access Object for cart_items table.
- */
 public class CartDao {
 
     private final DatabaseHelper dbHelper;
@@ -21,9 +18,6 @@ public class CartDao {
         this.dbHelper = DatabaseHelper.getInstance(context);
     }
 
-    /**
-     * Retrieves all items in the user's cart joined with food item details.
-     */
     public List<CartItem> getCartForUser(long userId) {
         List<CartItem> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -65,16 +59,12 @@ public class CartDao {
         return list;
     }
 
-    /**
-     * Adds an item to the cart or increments quantity if item with same configuration already exists.
-     */
     public long addToCart(CartItem item) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String sizeVal = item.getSize() != null ? item.getSize() : "";
         String addonsVal = item.getAddons() != null ? item.getAddons() : "";
 
-        // Check for existing matching item
         Cursor cursor = db.query(DatabaseHelper.TABLE_CART_ITEMS, null,
                 "user_id = ? AND food_id = ? AND size = ? AND addons = ?",
                 new String[]{String.valueOf(item.getUserId()), String.valueOf(item.getFoodId()), sizeVal, addonsVal},
@@ -115,9 +105,6 @@ public class CartDao {
         return db.insert(DatabaseHelper.TABLE_CART_ITEMS, null, cv);
     }
 
-    /**
-     * Updates item quantity or removes it if new quantity is 0 or less.
-     */
     public boolean updateQuantity(long cartItemId, int newQuantity) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (newQuantity <= 0) {
@@ -130,26 +117,17 @@ public class CartDao {
                 new String[]{String.valueOf(cartItemId)}) > 0;
     }
 
-    /**
-     * Removes an item from the cart.
-     */
     public boolean removeCartItem(long cartItemId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         return db.delete(DatabaseHelper.TABLE_CART_ITEMS, "id = ?",
                 new String[]{String.valueOf(cartItemId)}) > 0;
     }
 
-    /**
-     * Clears all items in the cart for a user.
-     */
     public void clearCart(long userId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(DatabaseHelper.TABLE_CART_ITEMS, "user_id = ?", new String[]{String.valueOf(userId)});
     }
 
-    /**
-     * Returns total item count in user cart.
-     */
     public int getCartCount(long userId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT SUM(quantity) FROM " + DatabaseHelper.TABLE_CART_ITEMS +
@@ -164,9 +142,6 @@ public class CartDao {
         return 0;
     }
 
-    /**
-     * Calculates base subtotal for items in cart.
-     */
     public double calculateSubtotal(long userId) {
         List<CartItem> items = getCartForUser(userId);
         double total = 0.0;
