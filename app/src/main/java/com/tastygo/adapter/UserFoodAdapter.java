@@ -83,7 +83,7 @@ public class UserFoodAdapter extends RecyclerView.Adapter<UserFoodAdapter.FoodVi
 
         holder.tvTitle.setText(item.getName());
         holder.tvDesc.setText(item.getDescription());
-        holder.tvPrice.setText(String.format(Locale.US, "$%.2f", item.getPrice()));
+        holder.tvPrice.setText(String.format(Locale.US, "Rs. %.2f", item.getPrice()));
 
         String category = item.getCategoryName();
         if (category == null || category.isEmpty()) {

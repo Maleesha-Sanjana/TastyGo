@@ -80,7 +80,7 @@ public class FoodOptionEditAdapter extends RecyclerView.Adapter<FoodOptionEditAd
         public void bind(FoodOption option, int position) {
             binding.tvOptionName.setText(option.getName());
             if (option.getExtraPrice() > 0) {
-                binding.tvOptionExtraPrice.setText(String.format(Locale.US, "+$%.2f", option.getExtraPrice()));
+                binding.tvOptionExtraPrice.setText(String.format(Locale.US, "+Rs. %.2f", option.getExtraPrice()));
             } else {
                 binding.tvOptionExtraPrice.setText("Free");
             }

@@ -119,7 +119,7 @@ public class FoodDetailActivity extends AppCompatActivity {
     private void bindFoodDetails() {
         tvTitle.setText(foodItem.getName());
         tvDescription.setText(foodItem.getDescription());
-        tvBasePrice.setText(String.format(Locale.US, "$%.2f", foodItem.getPrice()));
+        tvBasePrice.setText(String.format(Locale.US, "Rs. %.2f", foodItem.getPrice()));
 
         String category = foodItem.getCategoryName();
         tvCategory.setText(category != null && !category.isEmpty() ? category : "Tasty Specials");
@@ -137,7 +137,7 @@ public class FoodDetailActivity extends AppCompatActivity {
     private void updateTotalPrice() {
         if (foodItem == null) return;
         double total = foodItem.getPrice() * quantity;
-        btnAddToCart.setText(String.format(Locale.US, "Buy Now • $%.2f", total));
+        btnAddToCart.setText(String.format(Locale.US, "Buy Now • Rs. %.2f", total));
     }
 
     private void addToCart() {

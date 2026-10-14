@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="$8.99"
+                    android:text="Rs. 850.00"
                     android:textColor="@color/primary_chili"
                     android:textSize="20sp" />
 
@@ -187,7 +187,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Add to Cart • $8.99"
+                android:text="Buy Now • Rs. 850.00"
                 app:icon="@drawable/ic_shopping_cart"
                 app:iconGravity="textStart"
                 app:iconTint="@color/white" />

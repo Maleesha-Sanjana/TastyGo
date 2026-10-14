@@ -122,6 +122,30 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Delivery Address Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_address"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/prompt_address"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:startIconDrawable="@drawable/ic_location"
+                app:startIconTint="@color/text_caption">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textPostalAddress|textMultiLine"
+                    android:maxLines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Password Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_password"
@@ -171,6 +195,18 @@
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Tick button for Sellers -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_seller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Register as a Seller"
+                android:textColor="@color/text_ink"
+                android:textSize="@dimen/text_body"
+                app:buttonTint="@color/primary_chili" />
 
             <!-- Register Button (52dp height, 16dp radius) -->
             <com.google.android.material.button.MaterialButton

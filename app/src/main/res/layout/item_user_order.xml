@@ -26,12 +26,26 @@
 
             <TextView
                 android:id="@+id/tv_order_number"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:text="#TGO-1001"
                 android:textColor="@color/text_ink"
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_white"
+                android:backgroundTint="@color/status_placed_bg"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="PLACED"
+                android:textColor="@color/status_placed_text"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <TextView
@@ -75,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="$24.50"
+                android:text="Rs. 2,450.00"
                 android:textColor="@color/primary_chili"
                 android:textSize="15sp" />
         </LinearLayout>

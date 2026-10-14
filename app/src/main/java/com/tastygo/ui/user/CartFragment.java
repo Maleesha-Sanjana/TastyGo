@@ -187,7 +187,7 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
             tvBillDeliveryFee.setText("FREE");
         } else {
             currentDeliveryFee = 2.99;
-            tvBillDeliveryFee.setText(String.format(Locale.US, "$%.2f", currentDeliveryFee));
+            tvBillDeliveryFee.setText(String.format(Locale.US, "Rs. %.2f", currentDeliveryFee));
         }
 
         // Taxes & Charges (8%)
@@ -195,10 +195,10 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
 
         currentGrandTotal = Math.max(0.0, currentSubtotal + currentDeliveryFee + currentTax);
 
-        tvBillSubtotal.setText(String.format(Locale.US, "$%.2f", currentSubtotal));
-        tvBillTax.setText(String.format(Locale.US, "$%.2f", currentTax));
-        tvBillTotal.setText(String.format(Locale.US, "$%.2f", currentGrandTotal));
-        btnCheckout.setText(String.format(Locale.US, "Proceed to Checkout • $%.2f", currentGrandTotal));
+        tvBillSubtotal.setText(String.format(Locale.US, "Rs. %.2f", currentSubtotal));
+        tvBillTax.setText(String.format(Locale.US, "Rs. %.2f", currentTax));
+        tvBillTotal.setText(String.format(Locale.US, "Rs. %.2f", currentGrandTotal));
+        btnCheckout.setText(String.format(Locale.US, "Proceed to Checkout • Rs. %.2f", currentGrandTotal));
     }
 
     @Override
