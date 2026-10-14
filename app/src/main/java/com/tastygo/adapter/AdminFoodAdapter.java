@@ -76,7 +76,6 @@ public class AdminFoodAdapter extends ListAdapter<FoodItem, AdminFoodAdapter.Adm
 
             binding.tvAdminFoodName.setText(item.getName());
             binding.tvAdminFoodPrice.setText(String.format(Locale.US, "$%.2f", item.getPrice()));
-            binding.tvAdminFoodRating.setText(String.format(Locale.US, "%.1f", item.getAvgRating()));
 
             String catName = item.getCategoryName();
             if (catName != null && !catName.isEmpty()) {

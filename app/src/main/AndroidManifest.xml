@@ -50,6 +50,11 @@
             android:name=".ui.user.UserMainActivity"
             android:exported="false" />
 
+        <!-- Order Detail Activity -->
+        <activity
+            android:name=".ui.user.OrderDetailActivity"
+            android:exported="false" />
+
         <!-- Food Detail Activity -->
         <activity
             android:name=".ui.food.FoodDetailActivity"

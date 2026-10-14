@@ -56,8 +56,6 @@ public class UserMainActivity extends AppCompatActivity {
 
             if (id == R.id.nav_user_home) {
                 fragment = new HomeFragment();
-            } else if (id == R.id.nav_user_favorites) {
-                fragment = new FavoritesFragment();
             } else if (id == R.id.nav_user_cart) {
                 fragment = new CartFragment();
             } else if (id == R.id.nav_user_orders) {

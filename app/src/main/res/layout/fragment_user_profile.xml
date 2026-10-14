@@ -147,13 +147,30 @@
                             app:tint="@color/primary_chili" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
+                            android:layout_weight="1"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Delivery Address"
                             android:textColor="@color/text_ink"
                             android:textSize="14sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_profile_edit_address"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="0dp"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:text="Change"
+                            android:textColor="@color/primary_chili"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_edit"
+                            app:iconSize="14dp"
+                            app:iconTint="@color/primary_chili" />
                     </LinearLayout>
 
                     <TextView
@@ -167,20 +184,6 @@
                         android:textSize="13sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- Switch to Admin Portal (Demo evaluation) -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_profile_switch_admin"
-                style="@style/Widget.TastyGo.Button"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_height"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/accent_butter"
-                android:text="Switch to Admin Portal"
-                android:textColor="@color/text_ink"
-                app:icon="@drawable/ic_restaurant_menu"
-                app:iconGravity="textStart"
-                app:iconTint="@color/text_ink" />
 
             <!-- Log Out Button -->
             <com.google.android.material.button.MaterialButton

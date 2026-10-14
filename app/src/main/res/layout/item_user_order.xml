@@ -26,26 +26,12 @@
 
             <TextView
                 android:id="@+id/tv_order_number"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:text="#TGO-1001"
                 android:textColor="@color/text_ink"
                 android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_order_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_chip_white"
-                android:backgroundTint="@color/basil_tint"
-                android:fontFamily="@font/poppins_bold"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
-                android:text="DELIVERED"
-                android:textColor="@color/status_basil"
-                android:textSize="11sp" />
         </LinearLayout>
 
         <TextView

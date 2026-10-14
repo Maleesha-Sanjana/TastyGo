@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +19,8 @@ import com.google.android.material.button.MaterialButton;
 import com.tastygo.R;
 import com.tastygo.adapter.UserCartAdapter;
 import com.tastygo.database.CartDao;
-import com.tastygo.database.CouponDao;
 import com.tastygo.database.OrderDao;
 import com.tastygo.model.CartItem;
-import com.tastygo.model.Coupon;
 import com.tastygo.model.Order;
 import com.tastygo.util.AppExecutor;
 import com.tastygo.util.SessionManager;
@@ -41,35 +37,23 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
     private MaterialButton btnStartShopping;
     private TextView tvCartSubtitle;
 
-    // Coupon views
-    private EditText etCouponCode;
-    private MaterialButton btnApplyCoupon;
-    private LinearLayout layoutCouponApplied;
-    private TextView tvAppliedCouponText;
-    private ImageButton btnRemoveCoupon;
-
     // Bill summary views
     private TextView tvBillSubtotal;
     private TextView tvBillDeliveryFee;
     private TextView tvBillTax;
-    private LinearLayout layoutBillDiscountRow;
-    private TextView tvBillDiscount;
     private TextView tvBillTotal;
     private MaterialButton btnCheckout;
 
     private CartDao cartDao;
-    private CouponDao couponDao;
     private OrderDao orderDao;
     private SessionManager sessionManager;
     private UserCartAdapter adapter;
 
     private final List<CartItem> cartItems = new ArrayList<>();
-    private Coupon appliedCoupon = null;
 
     private double currentSubtotal = 0.0;
     private double currentDeliveryFee = 2.99;
     private double currentTax = 0.0;
-    private double currentDiscount = 0.0;
     private double currentGrandTotal = 0.0;
 
     @Nullable
@@ -78,13 +62,11 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
         View view = inflater.inflate(R.layout.fragment_user_cart, container, false);
 
         cartDao = new CartDao(requireContext());
-        couponDao = new CouponDao(requireContext());
         orderDao = new OrderDao(requireContext());
         sessionManager = new SessionManager(requireContext());
 
         initViews(view);
         setupRecyclerView();
-        setupCouponListeners();
         setupCheckoutListener();
 
         return view;
@@ -103,17 +85,9 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
         btnStartShopping = view.findViewById(R.id.btn_cart_start_shopping);
         tvCartSubtitle = view.findViewById(R.id.tv_cart_subtitle);
 
-        etCouponCode = view.findViewById(R.id.et_coupon_code);
-        btnApplyCoupon = view.findViewById(R.id.btn_apply_coupon);
-        layoutCouponApplied = view.findViewById(R.id.layout_coupon_applied);
-        tvAppliedCouponText = view.findViewById(R.id.tv_applied_coupon_text);
-        btnRemoveCoupon = view.findViewById(R.id.btn_remove_coupon);
-
         tvBillSubtotal = view.findViewById(R.id.tv_bill_subtotal);
         tvBillDeliveryFee = view.findViewById(R.id.tv_bill_delivery_fee);
         tvBillTax = view.findViewById(R.id.tv_bill_tax);
-        layoutBillDiscountRow = view.findViewById(R.id.layout_bill_discount_row);
-        tvBillDiscount = view.findViewById(R.id.tv_bill_discount);
         tvBillTotal = view.findViewById(R.id.tv_bill_total);
         btnCheckout = view.findViewById(R.id.btn_cart_checkout);
 
@@ -130,40 +104,6 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
         rvCartItems.setAdapter(adapter);
     }
 
-    private void setupCouponListeners() {
-        btnApplyCoupon.setOnClickListener(v -> {
-            String code = etCouponCode.getText().toString().trim();
-            if (code.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter a coupon code", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            AppExecutor.getInstance().execute(
-                    () -> couponDao.validateCoupon(code, currentSubtotal),
-                    coupon -> {
-                        if (coupon != null) {
-                            appliedCoupon = coupon;
-                            layoutCouponApplied.setVisibility(View.VISIBLE);
-                            tvAppliedCouponText.setText(coupon.getCode() + " applied! (" +
-                                    (coupon.isPercentage() ? (int) coupon.getValue() + "% OFF" : "$" + coupon.getValue() + " OFF") + ")");
-                            etCouponCode.setText("");
-                            recalculateBill();
-                            Toast.makeText(requireContext(), "Coupon applied successfully! 🎉", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(requireContext(), "Invalid or expired coupon code", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            );
-        });
-
-        btnRemoveCoupon.setOnClickListener(v -> {
-            appliedCoupon = null;
-            layoutCouponApplied.setVisibility(View.GONE);
-            recalculateBill();
-            Toast.makeText(requireContext(), "Coupon removed", Toast.LENGTH_SHORT).show();
-        });
-    }
-
     private void setupCheckoutListener() {
         btnCheckout.setOnClickListener(v -> {
             if (cartItems.isEmpty()) {
@@ -176,7 +116,7 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
             order.setUserId(userId);
             order.setAddressId(1L); // Default Address
             order.setSubtotal(currentSubtotal);
-            order.setDiscount(currentDiscount);
+            order.setDiscount(0.0);
             order.setDeliveryFee(currentDeliveryFee);
             order.setTax(currentTax);
             order.setTotal(currentGrandTotal);
@@ -190,7 +130,6 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
                     orderId -> {
                         if (orderId > 0) {
                             Toast.makeText(requireContext(), String.format(Locale.US, "Order #TGO-%04d placed successfully! 🚀", orderId), Toast.LENGTH_LONG).show();
-                            appliedCoupon = null;
                             loadCart();
                             if (getActivity() instanceof UserMainActivity) {
                                 ((UserMainActivity) getActivity()).updateCartBadge();
@@ -254,17 +193,7 @@ public class CartFragment extends Fragment implements UserCartAdapter.OnCartItem
         // Taxes & Charges (8%)
         currentTax = Math.round(currentSubtotal * 0.08 * 100.0) / 100.0;
 
-        // Discount
-        if (appliedCoupon != null) {
-            currentDiscount = appliedCoupon.calculateDiscount(currentSubtotal);
-            layoutBillDiscountRow.setVisibility(View.VISIBLE);
-            tvBillDiscount.setText(String.format(Locale.US, "-$%.2f", currentDiscount));
-        } else {
-            currentDiscount = 0.0;
-            layoutBillDiscountRow.setVisibility(View.GONE);
-        }
-
-        currentGrandTotal = Math.max(0.0, currentSubtotal - currentDiscount + currentDeliveryFee + currentTax);
+        currentGrandTotal = Math.max(0.0, currentSubtotal + currentDeliveryFee + currentTax);
 
         tvBillSubtotal.setText(String.format(Locale.US, "$%.2f", currentSubtotal));
         tvBillTax.setText(String.format(Locale.US, "$%.2f", currentTax));

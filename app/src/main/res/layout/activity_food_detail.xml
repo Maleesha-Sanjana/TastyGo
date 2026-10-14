@@ -44,18 +44,6 @@
                     android:src="@drawable/ic_arrow_back"
                     app:tint="@color/text_ink" />
 
-                <!-- Favorite Button -->
-                <ImageButton
-                    android:id="@+id/btn_detail_favorite"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="top|end"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/bg_circle_white"
-                    android:contentDescription="Favorite"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_favorite_border"
-                    app:tint="@color/primary_chili" />
             </FrameLayout>
 
             <!-- Food Info Card -->
@@ -94,38 +82,6 @@
                         android:textColor="@color/primary_chili"
                         android:textSize="11sp" />
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_chip_white"
-                        android:backgroundTint="@color/mist"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp">
-
-                        <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
-                            android:contentDescription="Rating"
-                            android:src="@drawable/ic_star_filled"
-                            app:tint="@color/accent_butter" />
-
-                        <TextView
-                            android:id="@+id/tv_detail_rating"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="4.8"
-                            android:textColor="@color/text_ink"
-                            android:textSize="12sp" />
-                    </LinearLayout>
                 </LinearLayout>
 
                 <!-- Title & Price -->
@@ -159,104 +115,6 @@
                     android:text="A mouthwatering flame-grilled beef patty layered with melted cheddar cheese, crisp lettuce, ripe tomatoes, and signature gourmet sauce on a toasted brioche bun."
                     android:textColor="@color/text_caption"
                     android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Options & Add-ons Container -->
-            <LinearLayout
-                android:id="@+id/layout_detail_options_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@color/surface_card"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <!-- Sizes Section -->
-                <LinearLayout
-                    android:id="@+id/layout_sizes_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Choose Size"
-                        android:textColor="@color/text_ink"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Select 1 option"
-                        android:textColor="@color/text_caption"
-                        android:textSize="12sp" />
-
-                    <RadioGroup
-                        android:id="@+id/rg_detail_sizes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
-
-                <!-- Add-ons Section -->
-                <LinearLayout
-                    android:id="@+id/layout_addons_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Add-ons &amp; Extras"
-                        android:textColor="@color/text_ink"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Select any extra items"
-                        android:textColor="@color/text_caption"
-                        android:textSize="12sp" />
-
-                    <LinearLayout
-                        android:id="@+id/layout_detail_addons_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="vertical" />
-                </LinearLayout>
-
-                <!-- Special Instructions -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Special Instructions"
-                    android:textColor="@color/text_ink"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/et_detail_notes"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_chip_white"
-                    android:backgroundTint="@color/mist"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="e.g. Less spicy, extra sauce on the side"
-                    android:inputType="text"
-                    android:paddingHorizontal="14dp"
-                    android:textColor="@color/text_ink"
-                    android:textColorHint="@color/text_caption"
-                    android:textSize="13sp" />
             </LinearLayout>
 
         </LinearLayout>

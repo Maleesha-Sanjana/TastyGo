@@ -34,6 +34,8 @@
     <color name="status_placed_text">#F2542D</color>
     <color name="status_preparing_bg">#FFF4D4</color>
     <color name="status_preparing_text">#B27B00</color>
+    <color name="status_out_delivery_bg">#E0F2FE</color>
+    <color name="status_out_delivery_text">#0284C7</color>
     <color name="status_delivered_bg">#E3F7EC</color>
     <color name="status_delivered_text">#2E9E6B</color>
     <color name="status_cancelled_bg">#EBE9F0</color>

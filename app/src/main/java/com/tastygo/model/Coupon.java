@@ -88,6 +88,10 @@ public class Coupon implements Serializable {
         isActive = active;
     }
 
+    public boolean isPercentage() {
+        return TYPE_PERCENT.equalsIgnoreCase(discountType);
+    }
+
     public double calculateDiscount(double subtotal) {
         if (!isActive || subtotal < minOrder) {
             return 0.0;
